@@ -1,0 +1,69 @@
+h4 This means that batch is finished and packed.
+
+.card: .card-block
+  h5.card-title Finished Product
+  = number_input f, :pouches_produced, '# Pouches (required)',
+    min: 1, required: true, step: '0.1',
+    'data-parsley-min' => '1', 'data-parsley-error-message' => 'Should be at least 1 pouch.'
+
+  = number_input f, :cartons_packed, '# Cartons',
+  tooltip(t('help.batch.cartons_packed'), placement: 'right', trigger: 'hover focus').merge({ \
+    min: '1', required: false, step: '1', \
+    'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('error.batch.cartons_packed_optional') \
+  })
+
+  = number_input f, :net_weight_sellable, 'Net Weight (required)',
+    tooltip(t('help.batch.net_weight_sellable'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: true, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+  = number_input f, :unusable_thin_product, 'Unusable (Thin)',
+    tooltip(t('help.batch.unusable_thin_product'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+  = number_input f, :unusable_thick_product, 'Unusable (Thick)',
+    tooltip(t('help.batch.unusable_thick_product'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+  = number_input f, :unusable_other_product, 'Unusable (Other)',
+    tooltip(t('help.batch.unusable_other_product'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+.card: .card-block
+  h5.card-title Fresh PrimaryIngredient Usage
+  = number_input f, :amount_of_primary_ingredient, '# Coconuts',
+  tooltip(t('help.batch.amount_of_primary_ingredient'), placement: 'right', trigger: 'hover focus').merge({ \
+    min: '1', required: false, step: '1', \
+    'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('error.batch.nonzero_nonzero_or_empty_error_optional') \
+  })
+
+  = number_input f, :harvest_good, 'Acceptable PrimaryIngredient',
+    tooltip(t('help.batch.harvest_good'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+  = number_input f, :harvest_thin, 'Thin PrimaryIngredient',
+    tooltip(t('help.batch.harvest_thin'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+  = number_input f, :harvest_thick, 'Thick PrimaryIngredient',
+    tooltip(t('help.batch.harvest_thick'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })
+
+  = number_input f, :harvest_scraps, 'Other Rejected PrimaryIngredient',
+    tooltip(t('help.batch.harvest_scraps'), placement: 'right', trigger: 'hover focus').merge({ \
+      min: '0.1', required: false, step: '0.001', \
+      'data-parsley-min' => '0.1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+    })

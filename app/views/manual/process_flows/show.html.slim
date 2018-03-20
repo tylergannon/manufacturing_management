@@ -1,0 +1,21 @@
+.p-1: .row
+  .col-xs-4
+    h4
+      = link_to edit_manual_process_flow_path(@manual_process_flow) do
+        = icon('edit', class: 'px-05')
+      = link_to manual_process_flow_path(@manual_process_flow, format: :png) do
+        = icon('picture-o', class: 'px-05')
+      = link_to manual_process_flow_path(@manual_process_flow, format: :pdf) do
+        = icon('file-pdf-o', class: 'px-05')
+      = link_to history_manual_process_flow_path(@manual_process_flow) do
+        = icon('history', class: 'px-05')
+      = link_to manual_process_flows_path do
+        = icon('arrow-left', class: 'px-05')
+
+    h3 Process Flow: #{@manual_process_flow.title}
+    h4 Version: #{@manual_process_flow.version}
+    h4 Doc ID: #{@manual_process_flow.document_id} 
+    h4 Author: #{@manual_process_flow.author.name}
+    h4 Category: #{@manual_process_flow.category}
+    h4 Product: #{@manual_process_flow.product}
+  .col-xs-8.pt-3=render partial: 'png_img_tag', locals: {process_flow: @manual_process_flow}

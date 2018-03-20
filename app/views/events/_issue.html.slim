@@ -1,0 +1,20 @@
+h3 Not sure about a quality issue?
+
+p Thanks for submitting an issue.  Please be sure to collect enough information for somebody to make a decision.
+
+.list-group.list-group-flush
+  a.list-group-item.list-group-item-action href=url_for([:photos, @batch])
+    i.mr-1 class="fa fa-check-square-o"
+    | Visual Problem?  Click here to add photos.
+  .list-group-item
+    i.mr-1 class="fa fa-exclamation"
+    | Make sure that the product is safely stored.
+
+  = f.fields_for :new_issue, Issue.new do |issue|
+
+    .list-group-item= textarea_input issue, :problem, 'What is the problem?', required: true,
+      'data-parsley-error-message' => 'Please fill this in.', rows: 3,
+      placeholder: "Please describe the problem in detail.  \nNot enough labor labor force to proceed, missing ingredients, quality concerns, etc."
+    .list-group-item= textarea_input issue, :steps_to_correct, 'Steps to correct the issue', required: true,
+      'data-parsley-error-message' => 'Please fill this in.', rows: 3,
+      placeholder: "Please suggest a solution.\ne.g. \"I think batch should be rejected\"\ne.g. \"Please provide the needed materials.\""

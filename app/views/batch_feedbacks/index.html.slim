@@ -1,0 +1,41 @@
+h1 Listing batch_feedbacks
+
+table
+  thead
+    tr
+      th Rancidity
+      th Coloration
+      th Thickness
+      th Texture
+      th Saltiness
+      th Spiciness
+      th Overall impression
+      th Appearance
+      th Batch
+      th User
+      th Notes
+      th
+      th
+      th
+
+  tbody
+    - @batch_feedbacks.each do |batch_feedback|
+      tr
+        td = batch_feedback.rancidity
+        td = batch_feedback.coloration
+        td = batch_feedback.thickness
+        td = batch_feedback.texture
+        td = batch_feedback.saltiness
+        td = batch_feedback.spiciness
+        td = batch_feedback.overall_impression
+        td = batch_feedback.appearance
+        td = batch_feedback.batch
+        td = batch_feedback.user
+        td = batch_feedback.notes
+        td = link_to 'Show', batch_feedback
+        td = link_to 'Edit', edit_batch_feedback_path(batch_feedback)
+        td = link_to 'Destroy', batch_feedback, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Batch feedback', new_batch_feedback_path

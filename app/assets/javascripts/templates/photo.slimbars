@@ -1,0 +1,2 @@
+.col-sm-3.col-lg-2.col-xs-6.pa-1
+  img src="{{ imageUrl }}" width="300px" height="300px" class="img-fluid"

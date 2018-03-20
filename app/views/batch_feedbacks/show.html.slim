@@ -1,0 +1,8 @@
+.row#show_batch_feedback
+  .col-xs-8.offset-md-2
+    = horizontal_dl cssClass: "batch-feedback-results" do
+      = dl_item @batch_feedback.user.name, @batch_feedback.feedback_date.strftime("%Y/%m/%d")
+      - BatchFeedback::ENUMS.each do |attr|
+        = dl_item attr.to_s.titleize, @batch_feedback.send(attr).titleize
+      = dl_item "Sellable", (@batch_feedback.sellable ? "Yes" : "No")
+      = dl_item "Notes", @batch_feedback.notes

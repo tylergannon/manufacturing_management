@@ -1,0 +1,18 @@
+.btn-group@group.card-like aria-label="Buttons"
+  - if controller_name != 'sessions'
+    a href=new_session_path(resource_name) class="btn btn-primary"
+      = responsive_btn_text 'sign-in', 'Log In'
+  - if devise_mapping.omniauthable?
+    - resource_class.omniauth_providers.each do |provider|
+      - provider_name = OmniAuth::Utils.camelize(provider.to_s.gsub(/_oauth2/, ''))
+      a [
+        href=omniauth_authorize_path(resource_name, provider)
+        class="btn btn-success"] = responsive_btn_text provider_name.downcase, "Sign In With #{provider_name}"
+  - if devise_mapping.registerable? && controller_name != 'registrations'
+    a href=new_registration_path(resource_name) class="btn btn-primary" Sign Up
+  - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+    a href=new_password_path(resource_name) class="btn btn-secondary" Reset Password
+  - if devise_mapping.confirmable? && controller_name != 'confirmations'
+    a href=new_confirmation_path(resource_name) class="btn btn-secondary" Resend Confirmation
+  - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
+    a href=new_unlock_path(resource_name) class="btn btn-secondary" Resend Unlock Instructions

@@ -1,0 +1,8 @@
+doctype html
+html lang="en"
+  head
+    title= content_for?(:title) ? yield(:title) : "Manufacturing Production Management"
+    = stylesheet_link_tag 'mailer_application'
+
+  body
+    = yield

@@ -1,0 +1,42 @@
+
+.dashboard_project {
+  height: 100%;
+  // display: flex;
+  .card-title {
+    border-bottom: 4px solid black;
+    &.green {
+      border-bottom-color: $brand-success;
+    }
+    &.yellow {
+      border-bottom-color: $brand-warning;
+    }
+    &.red {
+      border-bottom-color: $brand-danger;
+    }
+  }
+  a.set-color {
+    &.green {
+      color: $brand-success;
+    }
+    &.yellow {
+      color: $brand-warning;
+    }
+    &.red {
+      color: $brand-danger;
+    }
+  }
+
+  .current_status {
+    min-height: 100px;
+  }
+
+  .project_controls {
+    transition: all 1s linear;
+  }
+
+  &:not(:hover) {
+    .project_controls {
+      opacity: 0;
+    }
+  }
+}

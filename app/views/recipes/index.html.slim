@@ -1,0 +1,17 @@
+.row
+  .col-xs-12
+    h2 Listing #{@flavor.name} Flavor Recipes
+    - if can? :create, Recipe
+      = link_to 'New Recipe', new_flavor_recipe_path(@flavor)
+
+    ul.list-group.recipe_list#recipe_list data-url=sort_flavor_recipes_path(@flavor, format: :js)
+      - @recipes.each_with_index do |recipe, index|
+        li.list-group-item data-id=recipe.id href=flavor_recipe_path(@flavor, recipe)
+          - if can? :edit, Recipe
+            a.sortable.up href="#" = pill pull: 'left' do
+              = icon('chevron-circle-up')
+            a.sortable.down href="#" = pill pull: 'left' do
+              = icon('chevron-circle-down')
+          h4.list-group-heading: a href=url_for([@flavor, recipe]) = recipe.title
+
+    br

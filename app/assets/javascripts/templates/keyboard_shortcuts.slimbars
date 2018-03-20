@@ -1,0 +1,25 @@
+table.table
+  tr
+    td ⌘+shift+x
+    td Save and Exit
+  tr
+    td ⌘+shift+s
+    td Quick Save
+  tr
+    td ⌘+/
+    td Show/Hide Header
+  tr
+    td ⌘+.
+    td Show/Hide Menu
+  tr
+    td ⌘+k
+    td Show This Menu
+  tr
+    td ⌘+Option+0
+    td Fold All
+  tr
+    td ⌘+Option+Shift+0
+    td Unfold All
+
+| For more editor shortcuts&nbsp;
+a href='https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts' target='_blank' Click Here

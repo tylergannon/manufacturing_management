@@ -1,0 +1,43 @@
+#main_form.collapse.in: .card.card-like.my-2: .card-block
+  .table-list.mx-0.mt-1-sm-up.mb-2-sm-up
+    /.row.mx-0-sm-up.pt-1.thead
+    /  .col-xs-2.offset-xs-1: h5 Code
+    /  .col-xs-2: h5 Date
+    /  .col-sm-2.col-xs-1
+    /    h5.hidden-xs-down Flavor
+    /    h5.hidden-sm-up Flav
+    /  .col-xs-3.col-md-2: h5 Progress
+    /  .col-xs-1: h5 Cartons
+
+    .row.mx-0-sm-up.py-1-sm-up
+      .col-sm-6= "Boxes flavor1"
+      .col-xs-6= @shipment.boxes_packed_flavor1
+    .row.mx-0-sm-up.py-1-sm-up
+      .col-xs-6= "Boxes Flavor3"
+      .col-xs-6= @shipment.boxes_packed_flavor3
+    .row.mx-0-sm-up.py-1-sm-up
+      .col-xs-6= "Boxes Flavor2"
+      .col-xs-6= @shipment.boxes_packed_flavor2
+    *table_row
+      .col-xs-6= "House BL:"
+      .col-xs-6= @shipment.house_airway_bill
+    *table_row
+      .col-xs-6= "Master BL:"
+      .col-xs-6= @shipment.master_airway_bill
+    *table_row
+      .col-xs-6= "Carrier:"
+      .col-xs-6= @shipment.carrier
+    *table_row
+      .col-xs-6= link_to secure_download_shipment_path(@shipment, attribute: 'commercial_invoice'), target: '_blank' do
+        = responsive_btn_text 'cloud-download', 'Download Commercial Invoice'
+      .col-xs-6= link_to secure_download_shipment_path(@shipment, attribute: 'packing_list'), target: '_blank' do
+        = responsive_btn_text 'cloud-download', 'Download Packing List'
+    *table_row
+      .col-xs-12= @shipment.notes
+
+  .row: .col-md-9.offset-md-3
+    .btn-group.card-like
+      $button.btn.shipping.toggle_collapse[data-target="#shipment_photos" class=(@shipment.photos.any? ? 'btn-secondary' : 'btn-warning')]
+        = icon_button('Photos', 'fa-camera')
+      $button.btn.shipping.toggle_collapse[data-target="#shipment_batches" class=(@shipment.all_batches_ready? ? 'btn-secondary' : 'btn-warning')]
+        = icon_button('Review Batches', 'fa-list')

@@ -1,0 +1,3 @@
+<%# frozen_string_literal: true %>
+$('table#<%= dom_id(@recipe_ingredient) %>').replaceWith('<%= escape_javascript(render @recipe_ingredient) %>');
+$('#total_pph').html('<%= escape_javascript(render partial: 'recipes/total_grams_per_kilo_primary_ingredient') %>');

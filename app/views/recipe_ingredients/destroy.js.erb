@@ -1,0 +1,3 @@
+<%# frozen_string_literal: true %>
+$('table#<%= dom_id(@recipe_ingredient) %>').remove();
+$('#total_pph').html('Total: <%= @recipe.recipe_ingredients.total_pph %>');

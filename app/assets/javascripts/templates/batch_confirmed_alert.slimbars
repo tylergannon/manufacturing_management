@@ -1,0 +1,13 @@
+.modal#batch-confirmed-alert
+  .modal-dialog@document
+    .modal-content
+      .modal-header
+        $button.close aria-label="Close" data-dismiss="modal": i.fa.fa-times
+        h4.modal-title Batch Recipe Confirmed
+      .modal-body
+        p
+          | {{ requested_by }} has confirmed production of batch {{ batch_number }}.&nbsp;
+          a href="/batches/{{ batch_number }}#marinade" Go Here
+          | &nbsp; and please click the Start button to begin.
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button" OK

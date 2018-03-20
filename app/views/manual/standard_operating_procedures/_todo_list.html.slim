@@ -1,0 +1,11 @@
+
+table.table
+  thead
+    tr
+      td Line
+      td Item
+  - @standard_operating_procedure.todo_list.each do |todo_item|
+    tr
+      td= todo_item.line_number
+      td: a.todo_item href='#' data-line=todo_item.line_number = todo_item.text
+  

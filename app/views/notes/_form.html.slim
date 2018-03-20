@@ -1,0 +1,15 @@
+.row.note-form id="#{params[:action]}_#{dom_id(@note)}" : *col_sizes(md: 7, xs: 12) : .card
+  .card-block.p-0.note
+    = vertical_form_for @note, remote: true do |f|
+      .card-title.bg-faded.p-0.mb-0.pl-05
+        /.p-025.pl-05.mb-0
+        span.font-weight-bold.mr-025 #{params[:action].titleize} Comment
+        .btn-group.pull-right.btn-sm.p-0
+          button.btn.btn-sm.btn-primary type="submit"
+            = responsive_btn_text 'floppy-o', 'Save'
+          = link_to @note, class: 'btn btn-secondary btn-sm', data: {remote: true, confirm: t('flash.note.cancel')} do
+            = responsive_btn_text 'ban', 'Cancel'
+      = f.hidden_field :noteworthy_type
+      = f.hidden_field :noteworthy_id
+      .modal-body.p-0
+        = f.text_area :notes, class: 'w-100 p-0 border-bottom-radius-025', style: 'height: 100%; display: block;'

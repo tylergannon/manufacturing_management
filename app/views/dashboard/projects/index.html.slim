@@ -1,0 +1,9 @@
+= content_for(:title) do
+  | Cocob: Ops Dashboard
+  
+.p-1
+  h1 Operations Project Dashboard
+
+  .row
+    = cache @dashboard_projects do
+      = render @dashboard_projects

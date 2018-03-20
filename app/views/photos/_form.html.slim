@@ -1,0 +1,9 @@
+= simple_form_for(@photo) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :photo, as: :file
+    = f.association :batch_feedback
+
+  .form-actions
+    = f.button :submit

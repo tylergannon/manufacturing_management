@@ -1,0 +1,45 @@
+#main_form.collapse.in: .card.card-like.my-1: .card-block
+  = simple_form_for @shipment do |f|
+    .row
+      = shipment_prep_input(:boxes_packed_flavor1, f, '# Boxes OG')
+      = shipment_prep_input(:house_airway_bill, f, 'HAWB #')
+    .row
+      = shipment_prep_input(:boxes_packed_flavor3, f, '# Boxes CL')
+      = shipment_prep_input(:master_airway_bill, f, 'MAWB #')
+    .row
+      = shipment_prep_input(:boxes_packed_flavor2, f, '# Boxes GT')
+      = shipment_prep_input(:carrier, f, 'Carrier', as: :string)
+    .row
+      - [:commercial_invoice, :packing_list].each do |attribute|
+        = shipment_prep_input(attribute, f, attribute.to_s.titleize, as: :file, width: 'col-xs-6') do
+          - if @shipment.send("#{attribute}?")
+            = link_to secure_download_shipment_path(@shipment, attribute: attribute), target: '_blank'
+              i.mr-1-sm-up.fa.fa-cloud-download
+              span.hidden-xs-down Download
+    .row
+      = shipment_prep_input(:notes, f, 'Notes', as: :text, width: 'col-md-6')
+
+    .row: .col-md-9.offset-md-3
+      .btn-group.card-like
+        button type="submit" class='btn btn-success px-3-sm-up'
+          = icon_button('Save', 'fa-floppy-o')
+        $button.btn.shipping.toggle_collapse[data-target="#shipment_photos" class=(@shipment.photos.any? ? 'btn-secondary' : 'btn-warning')]
+          = icon_button('Photos', 'fa-camera')
+        $button.btn.shipping.toggle_collapse[data-target="#shipment_batches" class=(@shipment.all_batches_ready? ? 'btn-secondary' : 'btn-warning')]
+          = icon_button('Review Batches', 'fa-list')
+    .row: .col-md-6.offset-md-3
+      .list-group.pt-1
+        .list-group-item
+          - if @shipment.all_batches_ready?
+            i.fa.pr-1.fa-check-square-o
+            | All batches verified and are ready to go!
+          - else
+            i.fa.pr-1.fa-square-o
+            | Please Review Batches and complete QA before continuing.
+        .list-group-item
+          - if @shipment.photos.any?
+            i.fa.pr-1.fa-check-square-o
+            | Photos have been included!  Please add more if needed.
+          - else
+            i.fa.pr-1.fa-square-o
+            | Please be sure to add photos before continuing!

@@ -1,0 +1,5 @@
+= content_for(:title) do
+  | Batch ##{@batch.batch_number} * Manufacturing
+
+= content_for(:tab) do
+  = render partial: "overview", locals: {batch: @batch}

@@ -1,0 +1,17 @@
+.m-1.p-1
+  .row: .col-md-10.col-xs-12.mx-auto
+    .card-block
+
+      h2.card-title Forgot your password?
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = f.error_notification
+        .form-inputs
+          = f.input :email, required: true, autofocus: true
+        .form-actions
+          .btn-toolbar@toolbar
+            .btn-group@group.card-like
+              button$submit.btn.btn-primary
+                = responsive_btn_text 'envelope-o', 'Send Password Instructions'
+
+    .card-block
+      = render "devise/shared/links"

@@ -1,0 +1,7 @@
+
+$("[data-task-id=<%= @dashboard_task.id %>]").slideUp();
+$('#<%= dom_id(@dashboard_project, 'completed_last_week') %>').append('<%= escape_javascript(render @dashboard_task) %>');
+$('#<%= dom_id(@dashboard_project, 'count_new_this_week') %>').html('<%= @dashboard_project.tasks.created_last_week.count %>');
+$('#<%= dom_id(@dashboard_project, 'count_due_this_week') %>').html('<%= @dashboard_project.tasks.due_this_week.count %>');
+$('#<%= dom_id(@dashboard_project, 'count_completed_this_week') %>').html('<%= @dashboard_project.tasks.completed_last_week.count %>');
+$('#<%= dom_id(@dashboard_project, 'count_all_tasks') %>').html('<%= @dashboard_project.tasks.open.count %>');

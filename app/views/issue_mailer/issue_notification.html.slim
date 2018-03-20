@@ -1,0 +1,12 @@
+h4 A Production Issue Was Reported By #{@requested_by.name}.
+
+.list-group.m-2
+  .list-group-item
+    a href=batch_url(@batch)
+      span.list-group-item-heading #{@batch.batch_number} #{@batch.flavor.name}, Production Date: #{@batch.production_date.strftime("%b %-d")} (Click to open)
+  .list-group-item.font-weight-bold.bg-faded Problem:
+  .list-group-item
+    = @issue.problem
+  .list-group-item.font-weight-bold.bg-faded Steps To Correct:
+  .list-group-item
+    = @issue.steps_to_correct

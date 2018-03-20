@@ -1,0 +1,5 @@
+= link_to 'Give Feedback', new_batch_feedback_path(batch)
+
+- if batch.present?
+  .list-group
+    = render batch.batch_feedbacks

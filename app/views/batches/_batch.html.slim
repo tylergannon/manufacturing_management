@@ -1,0 +1,7 @@
+.row.mx-0.py-1.linkable data-href=batch_path(batch)
+  .col-xs-2= batch.batch_number
+  .col-xs-2= batch.production_date.strftime("%m/%d")
+  .col-xs-2.hidden-lg-down= batch.flavor.name
+  .col-xs-2.hidden-xl-up= batch.flavor.short_name
+  .col-xs-2= batch.current_state.name.to_s.titleize
+  .col-xs-2= friendly_date(batch.ships_on) || 'N/A'

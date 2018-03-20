@@ -1,0 +1,3 @@
+.alert.card-like.fade.in class='{{ alert_class }}' style='display: none;'
+  button.close data-dismiss="alert" x
+  | {{ message }}

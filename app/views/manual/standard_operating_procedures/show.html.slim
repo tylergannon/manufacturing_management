@@ -1,0 +1,20 @@
+.p-1
+
+  h3 #{@standard_operating_procedure.title}
+  = horizontal_dl do
+    = dl_item 'Author', @standard_operating_procedure.author.name
+    = dl_item 'Document ID', @standard_operating_procedure.document_id
+    = dl_item 'Updated', @standard_operating_procedure.updated_at.strftime('%b %e %Y, %l:%M %p')
+  = link_to [:edit, @standard_operating_procedure] do
+    = icon('edit', class: 'px-05')
+
+  = link_to manual_standard_operating_procedure_path(@standard_operating_procedure, format: :pdf) do
+    = icon('file-pdf-o', class: 'px-05')
+
+  = link_to history_manual_standard_operating_procedure_path(@standard_operating_procedure) do
+    = icon('history', class: 'px-05')
+  = link_to manual_standard_operating_procedures_path do
+    = icon('arrow-left', class: 'px-05')
+
+  hr
+  = Kramdown::Document.new(@standard_operating_procedure.body).to_html.html_safe

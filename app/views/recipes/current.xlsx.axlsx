@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+Flavor.all.each do |flavor|
+  wb.add_worksheet(name: flavor.name) do |sheet|
+    sheet.add_row [flavor.name]
+    sheet.add_row []
+    sheet.add_row ["Ingredient", "Grams / Kilo PrimaryIngredient", "Kilograms / 100 Kilos PrimaryIngredient"]
+    flavor.default_recipe.recipe_ingredients.each_with_index do |recipe_ingredient, i|
+      sheet.add_row [recipe_ingredient.name,
+        recipe_ingredient.grams_per_kilo_primary_ingredient.round(3),
+        "= B#{i+4}*1000/100"]
+    end
+  end
+end

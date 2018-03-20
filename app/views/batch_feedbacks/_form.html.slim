@@ -1,0 +1,17 @@
+.row
+  .col-xs-12
+    = simple_form_for(@batch_feedback) do |f|
+      = f.error_notification
+
+      .form-inputs
+        - @batch_feedback.class::ENUMS.each do |attribute|
+          = f.input attribute, collection: feedback_options(@batch_feedback, attribute), label_method: :last, value_method: :first
+
+        = f.input :sellable
+        = f.input :notes, as: :text
+        = f.input :feedback_date, as: :string, label: 'Date', required: false do
+          = f.input_field :feedback_date, as: :string, class: 'datepicker form-control'
+          i class="fa fa-calendar input-group-addon"
+
+      .form-actions
+        = f.button :submit

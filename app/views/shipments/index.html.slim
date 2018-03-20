@@ -1,0 +1,35 @@
+= content_for(:title) do
+  | Shipments * Manufacturing
+
+- cache @shipments do
+  .shipment-list.table-list.m-0
+    .row.mx-0.pt-1.thead
+      .col-md-6
+        h1= @page_title
+      .col-lg-6
+        .pull-lg-right.mb-1.btn-toolbar.btn-group-sm aria-label=("Basic example") role="group"
+          .pull-lg-right.mb-1.btn-group.btn-group-sm.card-like aria-label=("Basic example") role="group"
+            a href=shipments_path class="btn btn-secondary"
+              i class="fa fa-folder-open-o"
+              | &nbsp;Scheduled
+            a href=recent_shipments_path class="btn btn-secondary"
+              i class="fa fa-folder-open-o"
+              | &nbsp;Shipped
+            a href=all_shipments_path class="btn btn-secondary"
+              i class="fa fa-folder-open-o"
+              | &nbsp;All
+          - if can? :create, Shipment
+            .pull-lg-right.mb-1.btn-group.btn-group-sm.card-like aria-label=("Basic example") role="group"
+              a href=new_shipment_path class="btn btn-secondary"
+                i class="fa fa-file-o"
+                | &nbsp;New
+                span.hidden-xs-down &nbsp;Shipment
+        = paginate @shipments
+
+      .col-xs-4: h3 Date
+      .col-xs-4: h3 State
+      .col-xs-4: h3 Time
+    = render collection: @shipments, partial: 'shipment', cache: true
+
+
+  /= render partial: 'batches/batch', collection: @batches, cached: true

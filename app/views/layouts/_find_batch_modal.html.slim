@@ -1,0 +1,11 @@
+#jump-to-batch.modal.fade aria-hidden="true" aria-labelledby="jump-modal-label" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+        h4#jump-modal-label.modal-title Choose A Batch
+        p Type a batch number.  Hint: press SHIFT-f from any page to activate this dialog.
+      .modal-body
+        = form_tag '#', id: 'jump-to-batch-form' do
+          .bitches.w-100

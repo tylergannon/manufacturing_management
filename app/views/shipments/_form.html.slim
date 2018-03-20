@@ -1,0 +1,14 @@
+= simple_form_for(@shipment) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :ships_on, as: :string, label: 'Shipping Date', required: false do
+      = f.input_field :ships_on, as: :string, class: 'datepicker form-control'
+      i class="fa fa-calendar input-group-addon"
+    = f.input :ship_by_air
+    = f.input :boxes_ordered_flavor1, required: true
+    = f.input :boxes_ordered_flavor3, required: true
+    = f.input :boxes_ordered_flavor2, required: true
+
+  .form-actions
+    = f.button :submit

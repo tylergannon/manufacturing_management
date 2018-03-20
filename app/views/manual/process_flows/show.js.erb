@@ -1,0 +1,4 @@
+<% if @manual_process_flow.valid? %>
+$('#markdown').html('<%= escape_javascript(render partial: 'png_img_tag', locals: {process_flow: @manual_process_flow}) %>');
+<% end %>
+window.updater.updated()

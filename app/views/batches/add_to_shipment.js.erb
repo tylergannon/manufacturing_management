@@ -1,0 +1,4 @@
+<%# frozen_string_literal: true %>
+$('#add-to-shipment-modal').remove();
+$('body').append('<%= escape_javascript(render partial: 'add_to_shipment') %>');
+$('#add-to-shipment-modal').modal('show');

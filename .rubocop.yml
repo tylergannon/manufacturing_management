@@ -1,0 +1,36 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'vendor/**/*'
+    - 'config/initializers/*'
+    - 'tmp/**/*'
+    - 'db/**/*'
+    - 'spec/spec_helper.rb'
+    - 'lib/tasks/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/support/*'
+    - 'bin/*'
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/MethodLength:
+  Max: 14
+  Exclude:
+    - 'app/pdfs/sop_pdf_converter.rb'
+
+Style/MutableConstant:
+  Exclude:
+    - 'app/models/photo.rb'
+    - 'app/models/purchase_order.rb'
+
+Style/BracesAroundHashParameters:
+  Exclude:
+    - 'app/models/shipment.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/pdfs/sop_pdf_converter.rb'

@@ -1,0 +1,5 @@
+<%# frozen_string_literal: true %>
+$('.event_modal').remove();
+$('body').append('<%= escape_javascript(render partial: 'form') %>');
+$('.event_modal').modal('show');
+ParsleyConfigurator.configure('.event_modal form');

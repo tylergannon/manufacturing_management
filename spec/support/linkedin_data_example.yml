@@ -1,0 +1,78 @@
+--- !ruby/hash:OmniAuth::AuthHash
+provider: linkedin
+uid: 9LvzvqeTXN
+info: !ruby/hash:OmniAuth::AuthHash::InfoHash
+  name: Tyler Gannon
+  email: tgannon@gmail.com
+  nickname: Tyler Gannon
+  first_name: Tyler
+  last_name: Gannon
+  location: !ruby/hash:OmniAuth::AuthHash
+    country: !ruby/hash:OmniAuth::AuthHash
+      code: us
+    name: San Francisco Bay Area
+  description: Cofounder at Manufacturing, Partner/Strategy Consultant at Aprilseven, Internet
+    Application Consultant
+  image: https://media.licdn.com/mpr/mprx/0_7ujWfoUoWZOHwWcB2eFFeHAIuj3NHeVc8uLFWxpoWIbzS4UwQjFdX7goIu1daWE9DmwbbgtEhmKva2OR604vFOPQ5mKqa20ch04E20Qwm75ZXVXwummXuwesLREXb2e6Wyy5wD4anuG
+  urls: !ruby/hash:OmniAuth::AuthHash
+    public_profile: https://www.linkedin.com/in/tyler-gannon-219777
+credentials: !ruby/hash:OmniAuth::AuthHash
+  token: AQVu0BcVyaO7xP6-DCtFgAPAub261CTt_xfNuPJI13zSjUO7mZbiKMEOxiO8LtAskevXSbiVY7rZ1-ZzcBa1xhSVmJLWue5epVS8nj0xFYLuRrBgg1fscSGmuD8mLkAIvE-N4kHIAeAy0b3G8yJ5NiyH93uxf6lNGdFLA-Qu97kpAKjj9Nw
+  expires_at: 1460017408
+  expires: true
+extra: !ruby/hash:OmniAuth::AuthHash
+  raw_info: !ruby/hash:OmniAuth::AuthHash
+    emailAddress: tgannon@gmail.com
+    firstName: Tyler
+    headline: Cofounder at Manufacturing, Partner/Strategy Consultant at Aprilseven, Internet
+      Application Consultant
+    id: 9LvzvqeTXN
+    industry: Computer Software
+    lastName: Gannon
+    location: !ruby/hash:OmniAuth::AuthHash
+      country: !ruby/hash:OmniAuth::AuthHash
+        code: us
+      name: San Francisco Bay Area
+    pictureUrl: https://media.licdn.com/mpr/mprx/0_7ujWfoUoWZOHwWcB2eFFeHAIuj3NHeVc8uLFWxpoWIbzS4UwQjFdX7goIu1daWE9DmwbbgtEhmKva2OR604vFOPQ5mKqa20ch04E20Qwm75ZXVXwummXuwesLREXb2e6Wyy5wD4anuG
+    positions: !ruby/hash:OmniAuth::AuthHash
+      _total: 3
+      values:
+      - !ruby/hash:OmniAuth::AuthHash
+        company: !ruby/hash:OmniAuth::AuthHash
+          id: 5282869
+          industry: Food Production
+          name: Manufacturing
+          size: 1-10 employees
+          type: Privately Held
+        id: 684438943
+        isCurrent: true
+        startDate: !ruby/hash:OmniAuth::AuthHash
+          month: 6
+          year: 2015
+        title: Chief of Operations
+      - !ruby/hash:OmniAuth::AuthHash
+        company: !ruby/hash:OmniAuth::AuthHash
+          name: Aprilseven
+        id: 684438972
+        isCurrent: true
+        startDate: !ruby/hash:OmniAuth::AuthHash
+          month: 10
+          year: 2014
+        title: Partner
+      - !ruby/hash:OmniAuth::AuthHash
+        company: !ruby/hash:OmniAuth::AuthHash
+          id: 1706422
+          industry: Information Technology and Services
+          name: Freelance Software Engineer
+          ticker: ''
+        id: 671249495
+        isCurrent: true
+        startDate: !ruby/hash:OmniAuth::AuthHash
+          month: 4
+          year: 2008
+        summary: |-
+          Technology consulting and web software engineering. Deep Full-Stack expertise with Ruby on Rails.
+
+          R&D projects and middleware for medium and large corporations.  Core product development for web startups.  Maintenance and feature additions for existing components in Java, Ruby, Microsoft .Net, Perl, Bash.  Test-driven and methodical.
+        title: Senior Consultant / Freelance Engineer
+    publicProfileUrl: https://www.linkedin.com/in/tyler-gannon-219777

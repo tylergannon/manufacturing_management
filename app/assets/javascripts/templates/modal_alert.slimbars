@@ -1,0 +1,12 @@
+.modal#bs-alert-modal
+  .modal-dialog@document
+    .modal-content
+      .modal-header
+        $button.close aria-label="Close" data-dismiss="modal": i.fa.fa-times
+        h4.modal-title
+          | {{ modalTitle }}
+      .modal-body
+        p
+          | {{ message }}
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button" OK

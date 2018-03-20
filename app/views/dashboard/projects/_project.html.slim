@@ -1,0 +1,48 @@
+.col-md-4.col-sm-4: .card.card-like id=dom_id(project) class=dom_class(project) data-color=project.status_color data-url=dashboard_project_path(project)
+  .card-block
+    .font-weight-bold.card-title class=project.status_color
+      a href=project.task_list_url target="_blank" = project.name
+      span.project_controls.pull-xs-right
+        = link_to '#', data: {color: 'green'}, class: 'set-color green' do
+          = icon('circle', class: 'px-025')
+        = link_to '#', data: {color: 'yellow'}, class: 'set-color yellow' do
+          = icon('circle', class: 'px-025')
+        = link_to '#', data: {color: 'red'}, class: 'set-color red' do
+          = icon('circle', class: 'px-025')
+        = link_to '#', data: {confirm: 'This will save to Asana.'}, class: 'save-project-status' do
+          = icon('floppy-o', class: 'px-025')
+        = link_to project, method: :delete, data: {remote: true, confirm: 'This won\'t affect Asana but will hide the project from this dashboard.'} do
+          = icon('ban', class: 'px-025')
+      
+    p.card-text
+      p.current_status contenteditable=true = project.current_status
+      span class="tag tag-primary tag-pill pull-xs-right" Due: #{friendly_date(project.due_date) || 'Never'}
+      span class="tag tag-default tag-pill pull-xs-right" Upd: #{friendly_date(project.status_updated_at) || 'Never'}
+      - if project.status_updated_by
+        span class="tag tag-default tag-pill pull-xs-right"
+          = project.status_updated_by.split(' ').first
+  .list-group.list-group-flush
+    a.bg-faded.list-group-item data-toggle="collapse" href="##{dom_id(project, 'new_this_week')}" aria-expanded="false" aria-controls=dom_id(project, 'new_this_week')
+      | New In Past Week
+      *tag_pull id=dom_id(project, 'count_new_this_week') = project.tasks.created_last_week.count
+    .collapse id=dom_id(project, 'new_this_week')
+      - project.tasks.created_last_week.each do |task|
+        a.list-group-item target="_blank" href=task.task_url = task.name
+
+    a.bg-faded.list-group-item data-toggle="collapse" href="##{dom_id(project, 'due_this_week')}" aria-expanded="false" aria-controls=dom_id(project, 'due_this_week')
+      | Due This Week
+      *tag_pull id=dom_id(project, 'count_due_this_week') = project.tasks.due_this_week.count
+    .collapse id=dom_id(project, 'due_this_week')
+      = render project.tasks.due_this_week
+
+    a.bg-faded.list-group-item data-toggle="collapse" href="##{dom_id(project, 'completed_last_week')}" aria-expanded="false" aria-controls=dom_id(project, 'completed_last_week')
+      | Completed In Past Week
+      *tag_pull id=dom_id(project, 'count_completed_this_week') = project.tasks.completed_last_week.count
+    .collapse id=dom_id(project, 'completed_last_week')
+      = render project.tasks.completed_last_week
+
+    a.bg-faded.list-group-item data-toggle="collapse" href="##{dom_id(project, 'all_tasks')}" aria-expanded="false" aria-controls=dom_id(project, 'all_tasks')
+      | Open Tasks
+      *tag_pull id=dom_id(project, 'count_all_tasks') = project.tasks.open.count
+    .collapse id=dom_id(project, 'all_tasks')
+      = render project.tasks.open

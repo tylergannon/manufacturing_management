@@ -1,0 +1,27 @@
+// Place all the styles related to the recipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+a.list-group-item:first {
+  background-color: $alert-success-bg;
+}
+
+a.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+a.placeholder:before {
+  position: absolute;
+  content: '>';
+  /** Define arrowhead **/
+}

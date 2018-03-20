@@ -1,0 +1,5 @@
+.swiper-slide
+  img[
+    data-src="{{ imageUrl }}"
+    class="swiper-lazy m-x-auto d-block img-fluid"]
+  div class="swiper-lazy-preloader"

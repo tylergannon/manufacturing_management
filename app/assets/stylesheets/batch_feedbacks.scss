@@ -1,0 +1,38 @@
+// Place all the styles related to the batch_feedbacks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#show_batch_feedback dl {
+  dd, dt {
+    margin-bottom: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  &> dt:first-of-type, &> dd:first-of-type {
+    background-color: $gray-light;
+    font-size: 20pt;
+  }
+  &> dt:nth-of-type(2n+3), &> dd:nth-of-type(2n+3) {
+    background-color: $gray-lighter;
+  }
+}
+
+form.new_batch_feedback {
+  .form-group.integer {
+    &:hover {
+      background-color: $brand-warning;
+      border: 1px dotted;
+      border-radius: 4px;
+    }
+    padding: 25px;
+    padding-right: 100px;
+    &:last-child {
+      margin-bottom: inherit;
+    }
+  }
+
+  div.slider {
+    width: 100%;
+  }
+}

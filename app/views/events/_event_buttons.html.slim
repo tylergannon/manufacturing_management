@@ -1,0 +1,10 @@
+div id=dom_id(batch, 'batch_controls')
+  - if batch.current_state.terminal?
+    #event_button.card-like.btn-group.btn-group-sm role="group"
+      = link_to batch.workflow_state.titleize, '#', 
+        class: "btn btn-#{batch.current_state.color_name} disabled"
+  - else
+    #event_button.card-like.btn-group.btn-group-sm role="group" data-turbolinks="false"
+      - batch.current_state.events.each do |event|
+        = link_to *event_link_attrs(batch, event) do
+          = icon_btn_text(event.icon, event.title)

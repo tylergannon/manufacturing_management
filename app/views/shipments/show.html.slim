@@ -1,0 +1,78 @@
+= content_for(:title) do
+  | Shipment ##{friendly_date(@shipment.ships_on)} * Manufacturing
+
+- cache @shipment do
+  .shipment-list.table-list.m-0
+    .row.mx-0.pt-1.thead
+      .col-md-5
+        h1
+          - if @shipment.ship_by_air
+            i class="fa fa-plane"
+          - else
+            i class="fa fa-ship"
+          | &nbsp;Shipment:&nbsp;
+          = friendly_date(@shipment.ships_on)
+        = "#{@shipment.boxes_ordered_flavor1} OG • #{@shipment.boxes_ordered_flavor3} CL • #{@shipment.boxes_ordered_flavor2} GT"
+
+      .col-md-7
+        .pull-md-right.mb-1.btn-group.btn-group-sm.card-like aria-label=("Basic example") role="group"
+          = link_to([:edit, @shipment], class: 'btn') do
+            = icon('pencil-square-o', class: 'mr-025')
+            | Edit
+          $button.btn.btn-info *tooltip(t('help.shipments.connect_batch_button'), placement: 'bottom') data-click="modal" data-target="#choose-batch-modal"
+            i class="fa fa-plus"
+            | &nbsp;Connect Batch
+          a[
+            href=prepare_for_shipping_shipment_path(@shipment)
+            class="btn btn-success"
+            *tooltip(t('help.shipments.prepare_for_shipping_button'), placement: 'bottom')
+            ]
+            i class="fa fa-truck"
+            | &nbsp;Prepare For Shipping
+          $button.btn.btn-warning *tooltip(t('help.shipments.cancel_button'), placement: 'bottom') data-click="modal" data-target="#choose-batch-modal"
+            i class="fa fa-ban"
+            | &nbsp;Cancel Shipment
+          a[
+            href=url_for([@shipment, :carton_labels, {format: :pdf}])
+            target="_blank"
+            class="btn btn-success"
+            ]
+            = icon('print', class: 'mr-025')
+            | &nbsp;Carton Labels
+          a[
+            href=url_for([@shipment, :box_labels, {format: :pdf}])
+            target="_blank"
+            class="btn btn-success"
+            ]
+            = icon('print', class: 'mr-025')
+            | &nbsp;Box Labels
+
+    .row.mx-0-sm-up.pt-1.thead
+      .col-xs-2.offset-xs-1: h5 Code
+      .col-xs-1: h5 Date
+      .col-sm-2.col-xs-1
+        h5.hidden-xs-down Flavor
+        h5.hidden-sm-up Flav
+      .col-xs-1: h5 MB
+      - unless @shipment.shipped?
+        .col-xs-3.col-md-2: h5 Progress
+      .col-xs-1: h5 Cartons
+    = render collection: @shipment.batches.sort{|t, u| u.workflow_state <=> t.workflow_state}, 
+             partial: 'batch_shipment_view'
+  
+  = cache Batch.all do
+    #choose-batch-modal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+      .modal-dialog role="document"
+        .modal-content
+          .modal-header
+            button.close aria-label="Close" data-dismiss="modal" type="button"
+              span aria-hidden="true"  &times;
+            h4#myModalLabel.modal-title Select A Batch
+            p If you don't find the batch you're looking for, make sure that it isn't already cancelled, rejected or shipped.
+          = form_tag add_batch_shipment_path(@shipment), method: :post do
+            .modal-body
+              = select_tag :new_batch_id, options_from_collection_for_select(Batch.shippable, 'id', 'long_name'), class: 'w-100'
+            .modal-footer
+              .btn-group@group
+                button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+                = submit_tag 'Add Selected Batch', class: 'btn btn-primary'

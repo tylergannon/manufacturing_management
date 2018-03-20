@@ -1,0 +1,19 @@
+h1 New SOP
+
+= simple_form_for(@standard_operating_procedure) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :version
+    = f.input :process_id, label: 'Process ID', as: :integer
+    = f.fields_for :change_logs, @change_log do |ff|
+      = ff.input :notes, label: 'Change Notes', placeholder: 'e.g. created, added section...'
+      = ff.input_field :user_id, as: :hidden
+  .form-actions
+    = f.button :submit
+  .form-inputs
+    = f.input_field :body, as: :text, rows: 30, style: 'width: 100%;'
+
+
+= link_to 'Back', manual_standard_operating_procedures_path

@@ -1,0 +1,23 @@
+= cache @cache_object do
+  .m-0.p-1.card-bottom: h1.mb-0 New Batch
+
+  .mx-1.pt-1.new_batch
+
+    = simple_form_for(@batch) do |f|
+      = f.error_notification
+
+      .form-inputs.mt-1
+        = f.association :recipe, label: 'Flavor', required: false, collection: @recipes,
+          label_method: ->(r) {r.flavor.name}
+
+        = f.input :production_date, as: :string, label: 'Date', required: false do
+          = f.input_field :production_date, as: :string, class: 'datepicker form-control'
+          i class="fa fa-calendar input-group-addon"
+
+        = f.input :gross_fresh_primary_ingredient, required: false, label: 'Gross PrimaryIngredient'
+        = f.input :amount_of_primary_ingredient, label: '# Coconuts'
+
+        = f.input :shipment_id, collection: @shipments, required: false, label: 'Shipment'
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'

@@ -1,0 +1,24 @@
+.row.mx-0-sm-up.py-1-sm-up.linkable id=dom_id(batch_shipment_view, :shipment) data-href=batch_path(batch_shipment_view)
+  .col-xs-1: h3
+    - if batch_shipment_view.accepted? || batch_shipment_view.shipped?
+      i.fa.fa-check-square-o
+    - else
+      i.fa.fa-square-o
+
+  .col-xs-2
+    span.hidden-xs-down.mr-1-sm-up Batch
+    = batch_shipment_view.batch_number
+  .col-xs-1
+    span.hidden-xs-down= friendly_date(batch_shipment_view.production_date)
+    span.hidden-sm-up= batch_shipment_view.production_date.strftime("%m/%d")
+  .col-xs-1.col-sm-2
+    span.hidden-lg-down= batch_shipment_view.flavor.name
+    span.hidden-xl-up= batch_shipment_view.flavor.short_name
+  .col-xs-1= batch_shipment_view.exact_master_boxes.round(1)
+  - unless batch_shipment_view.shipment.shipped?
+    .col-xs-3.col-md-2= batch_shipment_view.workflow_state.titleize
+  .col-xs-3
+    - if batch_shipment_view.accepted? || batch_shipment_view.shipped?
+      = batch_shipment_view.cartons_packed
+    - else
+      = render partial: 'events/event_buttons', locals: {batch: batch_shipment_view}

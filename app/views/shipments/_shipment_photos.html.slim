@@ -1,0 +1,27 @@
+#shipment_photos.collapse: .card.card-like.my-1: .card-block
+  .row
+    .col-md-6
+      h3 Photos
+    .col-md-5
+      = render partial: 'photos/photo_upload', locals: {owner: @shipment}
+  .card: .card-block: .row#photo_list
+    - @shipment.photos.each do |photo|
+      .col-sm-3.col-lg-2.col-xs-6.p-1
+        a href=secure_download_photo_path(photo)
+          img src=photo.photo.expiring_url(15, :medium) class="img-fluid"
+
+  .btn-group.card-like
+    = render partial: 'photos/open_gallery_button', locals: {button_class: 'btn-success'}
+    $button.btn.btn-info.shipping.toggle_collapse[data-target="#main_form"]
+      i.fa.fa-info.mr-1
+      span.hidden-xs-down Shipment Details
+    $button.btn.btn-info.shipping.toggle_collapse[data-target="#shipment_batches"]
+      i.fa.fa-list.mr-1
+      span.hidden-xs-down Review Batches
+  .btn-group.card-like.pull-xl-right
+    $button.btn.bg-faded *tooltip(t('help.shipments.how_to_upload'), placement: 'top', trigger: 'hover click')
+      i.fa.fa-question.mr-1
+      span.hidden-xs-down How To Upload?
+    $button.btn.bg-faded *tooltip(t('help.shipments.what_photos_to_upload'), placement: 'top', trigger: 'hover click')
+      i.fa.fa-question.mr-1
+      span.hidden-xs-down What To Upload?

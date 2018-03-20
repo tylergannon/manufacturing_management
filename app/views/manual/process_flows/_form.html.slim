@@ -1,0 +1,44 @@
+= form_for(@manual_process_flow) do |f|
+
+  .form-inputs
+    #collapseDocumentProperties.collapse.p-1
+      .form_field
+        label Title
+        = f.text_field :title
+      .form_field
+        label Version
+        = f.text_field :version
+      .form_field
+        label Category
+        = f.text_field :category
+      .form_field
+        label Process ID
+        = f.number_field :process_id
+      .form_field
+        label Product
+        = f.text_field :product
+      = f.fields_for :change_logs, @change_log do |ff|
+        .form_field
+          label Notes
+          = ff.text_field :notes, placeholder: 'e.g. created, added section...'
+          = ff.hidden_field :user_id
+        .form_field
+          label Editor Theme:
+          = select_tag :theme, options_for_select(editor_themes, default_editor_theme), id: 'theme_select', class: 'no-chosen'
+        .form_field
+          label Font Size:
+          = text_field_tag :font_size, default_editor_font_size, id: 'editor_font_size'
+      hr/
+      .form_field
+        label Aspect Ratio
+        = f.text_field :aspect_ratio
+      .form_field
+        label Layout
+        = f.select :layout, ['portrait', 'landscape'], {include_blank: true}, class: 'no-chosen'
+    = f.hidden_field :body
+    #diagram_body [data-url=url_for(@manual_process_flow) 
+                    data-id=@manual_process_flow.id
+                    data-form-key=dom_class(@manual_process_flow)]
+      = @manual_process_flow.body
+
+  .form-actions: $submit.hidden-xs-up

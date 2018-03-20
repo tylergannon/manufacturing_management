@@ -1,0 +1,24 @@
+.row.edit-sop
+  .col-xs-12
+    ul.nav.nav-tabs
+      / li.nav-item= link_to manual_markdown_path, id: 'refresh_markdown', class: 'nav-link', method: :post, data: {remote: true} do
+      /   = icon('refresh', class: 'px-05')
+      li.nav-item: a.nav-link.save class=dom_class(@standard_operating_procedure) href='#'
+        = icon('save', class: 'px-05')
+      li.nav-item: a#collapse_menu.nav-link aria-controls="collapseDocumentProperties" aria-expanded="false" data-toggle="collapse" href="#collapseDocumentProperties"
+        = icon('arrow-down', class: 'px-05')
+      li.nav-item= link_to '#', class: 'nav-link', id: 'show_help_menu' do
+        = icon('question', class: 'px-05')
+      li.nav-item: a#editor_tab.nav-link.active role='tab' data-toggle='tab' href='#editor_pane'
+        = icon('file-text', class: 'px-05')
+      li.nav-item: a.nav-link role='tab' data-toggle='tab' href='#todo_pane'
+        = icon('list-ol', class: 'px-05')
+      li.nav-item: a.nav-link href=url_for(@standard_operating_procedure)
+        = icon('arrow-left', class: 'px-05')
+
+    .tab-content
+      .tab-pane.active#editor_pane role='tabpanel'= render partial: 'form'
+      .tab-pane#todo_pane role='tabpanel'= render partial: 'todo_list'
+  / .col-xs-6#markdown= Kramdown::Document.new(@standard_operating_procedure.body).to_html.html_safe
+
+= javascript_include_tag 'ace_config'

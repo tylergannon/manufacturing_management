@@ -1,0 +1,16 @@
+.show-immediately.event_modal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+        h4#myModalLabel.modal-title #{@event.title} Batch #{@batch.batch_number}
+      = form_for @batch, url: batch_event_path(@batch, @event.name), method: 'PATCH', 'data-turbolinks-action' => 'replace', remote: true do |f|
+        .modal-body= render partial: @event.name.to_s, locals: {batch: @batch, f: f}
+        .modal-footer
+          div class="btn-group btn-group-sm" role="group"
+            $button.btn.btn-secondary data-dismiss="modal" No, Close This Window
+            - if params['return_to']
+              = hidden_field_tag :return_to, params['return_to']
+            *event_form_button(@batch, @event)
+              = icon_btn_text(@event.icon, "Yes, #{@event.title}")

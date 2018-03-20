@@ -1,0 +1,7 @@
+a.list-group-item href=batch_feedback_path(batch_feedback.batch, batch_feedback)
+  span.tag.tag-pill.pull-xs-right.tag-default
+    = batch_feedback.feedback_date.strftime("%m/%d")
+  span.tag.tag-pill.pull-xs-right.tag-primary
+    = batch_feedback.overall_impression
+  h4.list-group-item-heading
+    = batch_feedback.user.name

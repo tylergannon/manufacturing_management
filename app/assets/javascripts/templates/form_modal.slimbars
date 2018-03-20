@@ -1,0 +1,7 @@
+.modal#form_modal
+  .modal-dialog@document
+    .modal-content
+      .modal-header
+        $button.close aria-label="Close" data-dismiss="modal": i.fa.fa-times
+        h4.modal-title Confirm PrimaryIngredient Source
+      | {{ form_controls }}

@@ -1,0 +1,5 @@
+<%# frozen_string_literal: true %>
+$('.modal').modal('hide');
+// $('#alerts').replaceWith('<%= escape_javascript(render partial: 'layouts/flash_messages') %>');
+// Alerts.showFlash();
+Turbolinks.visit(location.href, {action: 'replace'});

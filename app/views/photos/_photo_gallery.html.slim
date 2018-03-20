@@ -1,0 +1,18 @@
+#photo-gallery-modal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-body
+        button.pull-xs-right.close aria-label="Close" data-dismiss="modal" type="button"
+          i class="fa fa-times"
+        .swiper-container
+          .swiper-wrapper
+            - photos.each_with_index do |photo, index|
+              .swiper-slide
+                img[
+                  data-src=photo.photo.expiring_url(15, :large)
+                  class="swiper-lazy m-x-auto d-block img-fluid"]
+                div class="swiper-lazy-preloader"
+          .swiper-pagination
+          .swiper-button-prev
+          .swiper-button-next
+          .swiper-scrollbar

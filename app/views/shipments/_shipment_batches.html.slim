@@ -1,0 +1,47 @@
+#shipment_batches.collapse: .card.card-like.my-1: .card-block
+  h3 Review Batches
+  p.hidden-xs-down= t('help.shipments.batch_review_page')
+  .batch-list.table-list.mx-0.mt-1-sm-up.mb-2-sm-up
+    .row.mx-0-sm-up.pt-1.thead
+      .col-xs-2.offset-xs-1: h5 Code
+      .col-xs-2: h5 Date
+      .col-sm-2.col-xs-1
+        h5.hidden-xs-down Flavor
+        h5.hidden-sm-up Flav
+      - unless @shipment.shipped?
+        .col-xs-3.col-md-2: h5 Progress
+      .col-xs-1: h5 Cartons
+    - @shipment.batches.sort{|a,b| b.workflow_state <=> a.workflow_state}.each do |batch|
+      .row.mx-0-sm-up.py-1-sm-up.linkable data-href=batch_path(batch)
+        .col-xs-1: h3
+          - if batch.accepted?
+            i.fa.fa-check-square-o
+          - elsif !@shipment.shipped?
+            i.fa.fa-square-o
+
+
+        .col-xs-2
+          span.hidden-xs-down.mr-1-sm-up Batch
+          = batch.batch_number
+        .col-xs-2
+          span.hidden-xs-down= friendly_date(batch.production_date)
+          span.hidden-sm-up= batch.production_date.strftime("%m/%d")
+        .col-xs-1.col-sm-2
+          span.hidden-lg-down= batch.flavor.name
+          span.hidden-xl-up= batch.flavor.short_name
+        - unless @shipment.shipped?
+          .col-xs-3.col-md-2= batch.workflow_state.titleize
+        .col-xs-3
+          - if batch.accepted? || @shipment.shipped?
+            = batch.cartons_packed
+          - else
+            = render partial: 'events/event_buttons', locals: {batch: batch}
+
+  .row: .col-md-9.offset-md-3
+    .btn-group.card-like
+      $button.btn.btn-secondary.shipping.toggle_collapse[data-target="#main_form"]
+        i.fa.fa-info
+        span.hidden-xs-down.ml-1 Shipment Details
+      $button.btn.btn-secondary.shipping.toggle_collapse[data-target="#shipment_photos"]
+        i.fa.fa-camera
+        span.hidden-xs-down.ml-1 Add Photos

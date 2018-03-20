@@ -1,0 +1,10 @@
+.p-1
+  h1 History for #{@document.document_id}: #{link_to @document.title, @document}
+  
+  table.table
+    - @document.change_logs.order(created_at: :desc).each do |change_log|
+      tr
+        td= change_log.user&.name
+        td= change_log.version
+        td= change_log.notes
+        td= change_log.created_at.strftime('%A, %b %d')

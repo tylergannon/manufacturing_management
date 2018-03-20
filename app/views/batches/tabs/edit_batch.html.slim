@@ -1,0 +1,84 @@
+= cache @batch do
+  .recipe
+    .row: .mx-auto.px-0 *col_sizes(xs: 12, sm: 11, md: 10)
+      = simple_form_for(@batch, wrapper: :shrinky, remote: true, html: {id: 'blahblah'}) do |f|
+        = f.error_notification
+
+        .form-inputs
+
+          .card.card-block
+            h4.card-title Important
+            = number_input f, :pouches_produced, '# Pouches',
+              min: 1, required: false, step: '0.1',
+              'data-parsley-min' => '1', 'data-parsley-error-message' => 'Should be at least 1 pouch.'
+
+            = number_input f, :cartons_packed, '# Cartons',
+              min: 1, required: false, step: '1',
+              'data-parsley-min' => '1', 'data-parsley-error-message' => 'Should be at least 1 pouch.'
+
+            = number_input f, :net_weight_sellable, 'Net Weight Product',
+              tooltip(t('help.batch.net_weight_sellable'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+            = number_input f, :gross_fresh_primary_ingredient, 'Fresh PrimaryIngredient Used',
+              tooltip(t('help.batch.gross_fresh_primary_ingredient'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+            = text_input f, :production_date, 'Production Date', class: 'datepicker'
+
+
+          .card.card-block
+            h4.card-title Harvest
+
+            = number_input f, :amount_of_primary_ingredient, 'Number of Coconuts',
+              tooltip(t('help.batch.amount_of_primary_ingredient'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '1', required: false, step: '1', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('error.batch.nonzero_nonzero_or_empty_error_optional') \
+              })
+
+            = number_input f, :harvest_thick, 'Thick PrimaryIngredient Rejected',
+              tooltip(t('help.batch.harvest_thick'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+
+            = number_input f, :harvest_thin, 'Thin PrimaryIngredient Rejected',
+              tooltip(t('help.batch.harvest_thin'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+
+            = number_input f, :harvest_scraps, 'Other PrimaryIngredient Rejected',
+              tooltip(t('help.batch.harvest_scraps'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+
+          .card.card-block
+            h4.card-title Production
+
+            = number_input f, :unusable_thin_product, 'Unusable (Thin)',
+              tooltip(t('help.batch.unusable_thin_product'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+
+            = number_input f, :unusable_thick_product, 'Unusable (Thick)',
+              tooltip(t('help.batch.unusable_thick_product'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+
+            = number_input f, :unusable_other_product, 'Unusable (Other)',
+              tooltip(t('help.batch.unusable_other_product'), placement: 'right', trigger: 'hover focus').merge({ \
+                min: '0.1', required: false, step: '0.001', \
+                'data-parsley-min' => '1', 'data-parsley-error-message' => t('help.batch.nonzero_float_kilos') \
+              })
+
+          - if current_user.admin?
+            = f.association :recipe, wrapper: :vertical_form, collection: @batch.flavor.recipes, label_method: :long_name
+
+        .form-actions
+          = f.button :submit

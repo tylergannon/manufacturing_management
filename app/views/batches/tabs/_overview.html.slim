@@ -1,0 +1,69 @@
+= cache @batch do
+  .row: *col_sizes(xs: 12, offset: {sm: 2})
+    = render partial: 'events/event_buttons', locals: {batch: batch}
+
+    .pt-1
+      - if batch.present?
+        = horizontal_dl do
+          = dl_attributes batch, :coding_printer_setting, :production_date, :expiration_date, :ships_on
+
+          - if batch.gross_fresh_primary_ingredient 
+            = dl_item "PrimaryIngredient Used", batch.gross_fresh_primary_ingredient
+            - if batch.current_state.packaged?
+              = dl_item "Pouches", batch.pouches_produced
+              = dl_item "Net Product", batch.net_weight_sellable
+            - else
+              = dl_item "Est. Pouches", batch.pouches_to_prepare_before
+          - else
+            = dl_item "Net PrimaryIngredient", "Please give amount of primary_ingredient"
+
+        #notes_container= render batch.notes
+        .btn-group.btn-group-sm.card-like@group *print_message_wrapper(batch)
+          - unless batch.current_state.terminal?
+            *carton_labels_link(batch)
+              i class="fa fa-print mr-025"
+              | Carton Labels
+            *box_labels_link(batch)
+              i class="fa fa-print mr-025"
+              | Box Labels
+          - if batch.shipment
+            a.btn.btn-secondary href=shipment_path(batch.shipment)
+              i class="fa fa-truck mr-025"
+              | Shipment
+          - elsif !batch.current_state.terminal?
+            = link_to [:add_to_shipment, batch], class: 'btn btn-secondary', data: {remote: true} do
+              i class="fa fa-truck mr-025"
+              | Connect To Shipment
+          button.btn.btn-secondary.hidden-sm-down type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
+            i class="fa fa-info mr-025"
+            | More Info
+          $button.btn.btn-secondary data-click="modal" data-target="#add-notes-modal"
+            i class="fa fa-pencil mr-025-sm-up"
+            span.hidden-xs-down Add Notes
+
+        div class="collapse" id="collapseExample"
+          .pt-2= horizontal_dl do
+            = dl_attributes batch, :cartons_packed, :pouches_produced, :net_weight_sellable, :gross_fresh_primary_ingredient, :amount_of_primary_ingredient, 
+                                  :harvest_thick, :harvest_thin, :harvest_scraps, :harvest_good, :unusable_thin_product, :unusable_thick_product, :unusable_other_product
+
+      - else
+        h4 No batch for this day.
+        = link_to 'Add One', new_batch_path
+
+  /! Modal
+  #add-notes-modal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header
+          button.close aria-label="Close" data-dismiss="modal" type="button"
+            span aria-hidden="true"  &times;
+          h4#myModalLabel.modal-title Add A Note To This Batch
+        = vertical_form_for Note.new(noteworthy: batch), remote: true do |f|
+          = f.hidden_field :noteworthy_type
+          = f.hidden_field :noteworthy_id
+          .modal-body
+            = f.text_area_input :notes
+
+          .modal-footer
+            button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+            = f.submit 'Add Notes', class: 'btn btn-primary'

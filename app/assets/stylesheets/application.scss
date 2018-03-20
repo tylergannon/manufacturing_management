@@ -1,0 +1,58 @@
+/*
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
+ *= require swiper
+ *= require picker
+ *= require picker.date
+ *= require chosen
+ */
+$spacer:   1rem;
+$spacer-x: $spacer;
+$spacer-y: $spacer;
+$spacers: (
+ 0: (
+   x: 0,
+   y: 0
+ ),
+ 1: (
+   x: $spacer-x,
+   y: $spacer-y
+ ),
+ 2: (
+   x: ($spacer-x * 1.5),
+   y: ($spacer-y * 1.5)
+ ),
+ 3: (
+   x: ($spacer-x * 3),
+   y: ($spacer-y * 3)
+ ),
+ '025': (
+   x: ($spacer-x * 0.25),
+   y: ($spacer-y * 0.25)
+ ),
+ '05': (
+   x: ($spacer-x * 0.5),
+   y: ($spacer-y * 0.5)
+ ),
+ '075': (
+   x: ($spacer-x * 0.75),
+   y: ($spacer-y * 0.75)
+ )
+);
+
+$enable-flex: true;
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "bootstrap";
+@import "global";
+@import "bootstrap-chosen";
+@import "batches";
+@import "recipes";
+@import "shipments";
+@import "menu";
+@import "notes";
+@import "batch_feedbacks";
+@import "dashboard/projects";
+@import "dashboard/tasks";
+@import "manual/standard_operating_procedures";
+@import "manual/process_flows";

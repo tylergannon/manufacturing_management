@@ -1,0 +1,4 @@
+<%# frozen_string_literal: true %>
+$('<%= escape_javascript(render @recipe_ingredient) %>').insertBefore('table#new_recipe_ingredient');
+$('#new_recipe_ingredient')[0].reset();
+$('#total_pph').html('Total: <%= @recipe.recipe_ingredients.total_pph %>');

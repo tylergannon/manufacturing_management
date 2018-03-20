@@ -1,0 +1,36 @@
+
+.row#photo_upload
+  .col-xs-12
+    = simple_form_for(Photo.new(batch: Batch.last), format: :json, remote: true, multipart: true, authenticity_token: true) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :batch_id, as: :hidden
+        = f.input :photo, as: :file, input_html: {accept: 'image/*'}
+
+      .form-actions
+        = f.button :submit
+
+    = link_to 'New Photo', new_photo_path
+
+  .col-xs-12: #upload-list.list-group
+
+.row#photo_list
+  - @photos.each do |photo|
+    .col-sm-3.col-lg-2.col-xs-6.p-1
+      a href=secure_download_photo_path(photo) class="m-x-auto d-block"
+        img src=photo.photo.expiring_url(15, :medium) class="m-x-auto d-block"
+
+.row: .col-xs-12
+  .swiper-container
+    .swiper-wrapper
+      - @photos.each_with_index do |photo, index|
+        .swiper-slide
+          img[
+            data-src=photo.photo.expiring_url(100, :large)
+            class="swiper-lazy m-x-auto d-block img-fluid"]
+          div class="swiper-lazy-preloader"
+    .swiper-pagination
+    .swiper-button-prev
+    .swiper-button-next
+    .swiper-scrollbar

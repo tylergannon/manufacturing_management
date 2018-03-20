@@ -1,0 +1,19 @@
+= content_for(:title) do
+  = page.page_title
+
+= cache page.resource do
+  header.header
+    h1.header__heading= content_for(:title)
+    .header__actions= link_to 'Edit', [:edit, namespace, page.resource], class: 'button'
+  dl
+    - page.attributes.each do |attribute|
+      dt.attribute-label= attribute.name.titleize
+      dd.attribute-data class="attribute-data--#{attribute.html_class}"= render_field attribute
+
+  = simple_form_for(page.resource, as: :user, url: password_path(:user), html: { method: :post }) do |f|
+    = f.hidden_field :email
+    .form-actions
+      .btn-toolbar@toolbar
+        .btn-group@group.card-like
+          button$submit.btn.btn-primary
+            = responsive_btn_text 'envelope-o', 'Send Password Instructions'

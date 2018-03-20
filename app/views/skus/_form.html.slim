@@ -1,0 +1,8 @@
+= simple_form_for @sku do |f|
+  = f.input :title
+  = f.input :net_weight
+  = f.input :upc_filename
+  = f.input :composed_quantity
+  = f.association :flavor, collection: Flavor.all
+  = f.association :composed_of, collection: Sku.all, label_method: :title
+  = f.submit

@@ -1,0 +1,9 @@
+p#notice = notice
+= image_tag @photo.photo.expiring_url(10, :medium)
+p
+  strong Batch feedback:
+  = @photo.batch_feedback
+
+= link_to 'Edit', edit_photo_path(@photo)
+'|
+= link_to 'Back', photos_path

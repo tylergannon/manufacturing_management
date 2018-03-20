@@ -1,0 +1,3 @@
+#!/usr/bin/env /Users/tyler/src/manufacturing_batch_reporting/bin/rails runner
+
+Dashboard::Project.reload_all

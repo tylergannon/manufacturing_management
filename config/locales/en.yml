@@ -1,0 +1,111 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  helpers:
+    label:
+      purchase_order:
+        boxes_flavor1: 'MB flavor1'
+        boxes_flavor3: 'MB Flavor3'
+        boxes_flavor2: 'MB G. Teriyaki'
+        workflow_state: 'Progress'
+        fulfillment_warehouse: 'Warehouse'
+
+  activerecord:
+    attributes:
+      purchase_order:
+        fulfillment_warehouse_id: 'Warehouse'
+
+      batch:
+        cartons_packed: "# Cartons Packed"
+        net_weight_sellable: "Net Sellable Product"
+        gross_fresh_primary_ingredient: "Total Fresh PrimaryIngredient"
+        amount_of_primary_ingredient: "# Coconuts Used"
+        harvest_thick: "Rejected Thick PrimaryIngredient"
+        harvest_thin: "Rejected Thin PrimaryIngredient"
+        harvest_scraps: "Other Rejected PrimaryIngredient"
+        unusable_thin_product: "Rejected Product (thin)"
+        unusable_thick_product: "Rejected Product (thick)"
+        unusable_other_product: "Rejected Product (other)"
+        ships_on: "Ships On"
+        production_date: 'Produced On'
+        expiration_date: 'Expires'
+        coding_printer_setting: 'Batch Code'
+    defaults:
+      batch:
+        coding_printer_setting: 'Please connect to shipment'
+        ships_on: 'Please connect to shipment'
+
+    errors:
+      models:
+        batch:
+          attributes:
+            gross_fresh_primary_ingredient:
+              not_a_number: "Please enter an amount of primary_ingredient for this batch."
+            shipment:
+              blank: "Please specify a shipment for this batch."
+  flash:
+    note:
+      cancel: 'Your changes will be lost.  Are you sure?'
+    batch:
+      events:
+        issue: "Thanks, your issue was received and an email was sent.  Please be sure the product is stored safely."
+        cancel: "The batch has been cancelled."
+        request_confirmation: 'Confirmation Request was received.'
+        confirm: "The batch was confirmed."
+        start: "Production is started."
+        finish: "Production is complete, batch is ready for QA."
+        reject: "The batch was rejected.  Please ensure the product is not shipped."
+        resolve: "The issue has been resolved."
+        accept: "Great!  Product Accepted."
+        ship: "Excellent!  Product was shipped."
+  titles:
+    batches:
+
+  error:
+    batch:
+      cartons_packed_optional: "Should be at least one carton, or leave empty."
+      nonzero_nonzero_or_empty_error_optional: "Should be nonzero, or leave empty."
+      labels_error:
+        no_shipment: "You need to assign a shipment before you can print labels for this batch."
+        no_primary_ingredient_quantity: "You need to enter an amount of primary ingredient before you can print labels for this batch."
+        no_primary_ingredient_or_shipment: "You need to (a) assign a shipment and (b) enter an amount of primary_ingredient before you can print labels."
+  help:
+    batch:
+      harvest_good: "Amount of fresh primary_ingredient used for making product."
+      amount_of_primary_ingredient: "Amount of primary ingredient opened for this batch."
+      nonzero_float_kilos: "Should be at least 0.1 kilos."
+      unusable_thin_product: "Total weight of product that's too thin."
+      unusable_thick_product: "Total weight of product that's too thick."
+      unusable_other_product: "Weight of product unusable for other reasons."
+      net_weight_sellable: "Weight of packaged product."
+      gross_fresh_primary_ingredient: "Post-harvest weight of fresh primary_ingredient used for production."
+      cartons_packed: "Number of cartons from this batch that will be shipped."
+      harvest_thin: "Weight of thin primary_ingredient rejected."
+      harvest_thick: "Weight of thick primary_ingredient rejected."
+      harvest_scraps: "Weight of other primary_ingredient (scraps) rejected."
+    shipments:
+      connect_batch_button: "Click to include another batch in this shipment."
+      cancel_button: "Cancel this shipment and release all associated product."
+      prepare_for_shipping_button: "Click here when the order is complete, to process for shipping."
+      how_to_upload: "To upload, click the 'Choose File' button.  File will upload automatically.  You can also drag a file anywhere onto the browser."
+      what_photos_to_upload: "At a minimum there should be photos of each pallet showing its condition.  Any potential issue should be photographed and uploaded.  Anything else of interest."
+      batch_review_page: "Before shipping, please take time to ensure that each batch is properly accounted for.  Once all product is packaged, boxed, and has had final verification, be sure to mark it as Accepted.  When each batch has completed this QA documentation, then the shipment is ready to go out the door."

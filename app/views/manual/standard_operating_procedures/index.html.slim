@@ -1,0 +1,44 @@
+.p-1
+  .row
+    .col-md-5
+      h3.pb-2 Standard Operating Procedures
+    .col-md-7: nav: ul.nav.pull-md-right.nav-inline
+      li.nav-item.float-xs-right.mx-1
+        a.nav-link href=url_for([:manual_standard_operating_procedures, {format: :zip}])
+          = icon('download', class: 'px-05')
+          | Download Zip
+      li.nav-item.float-xs-right.mx-1
+        a.nav-link href=new_manual_standard_operating_procedure_path
+          = icon('plus-circle', class: 'px-05')
+          | New S.O.P.
+      li.nav-item.float-xs-right.mx-1
+        a.nav-link href=manual_process_flows_path
+          = icon('object-group', class: 'px-05')
+          | Process Flows
+
+  table.table
+    thead
+      tr
+        th Title
+        th Version
+        th Last Modified
+        th Author
+        th State
+        th
+
+    tbody
+      - @sops.each do |sop|
+        tr
+          td = link_to_sop sop
+          td = sop.version
+          td = sop.updated_at.strftime('%b %e %Y, %l:%M %p')
+          td = sop.author.name
+          td = sop.workflow_state.titleize
+          td = link_to [sop, {format: :pdf}], target: '_blank' do
+            = icon('file-pdf-o')
+          td = link_to [:edit, sop] do
+            = icon('edit')
+          td = link_to sop, method: :delete, data: {confirm: 'Sure?'} do
+            = icon('trash')
+
+  br

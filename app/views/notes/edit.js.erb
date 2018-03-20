@@ -1,0 +1,2 @@
+<%# frozen_string_literal: true %>
+Notes.editNote('<%= dom_id(@note) %>', '<%= escape_javascript(render partial: 'form', locals: {note: @note}) %>');

@@ -1,0 +1,44 @@
+.p-1
+  .row
+    .col-md-5
+      h3.pb-2 Process Flows
+    .col-md-7: nav: ul.nav.pull-md-right.nav-inline
+      li.nav-item.float-xs-right.mx-1
+        a.nav-link href=url_for([:manual_standard_operating_procedures, {format: :zip}])
+          = icon('download', class: 'px-05')
+          | Download Zip
+      li.nav-item.float-xs-right.mx-1
+        a.nav-link href=new_manual_process_flow_path
+          = icon('plus-circle', class: 'px-05')
+          | New Process Flow
+      li.nav-item.float-xs-right.mx-1
+        a.nav-link href=manual_standard_operating_procedures_path
+          = icon('list-ol', class: 'px-05')
+          | S.O.P.
+    
+  table.table
+    thead
+      tr
+        th Title
+        th Version
+        th Author
+        th Product
+        th
+
+    tbody
+      - @manual_process_flows.each do |manual_process_flow|
+        tr
+          td = link_to_process_flow manual_process_flow
+          td = manual_process_flow.version
+          td = manual_process_flow.author.name
+          td = manual_process_flow.product
+          td = link_to [manual_process_flow, {format: :pdf}], target: '_blank' do
+            = icon('file-pdf-o')
+          td = link_to edit_manual_process_flow_path(manual_process_flow)
+            = icon('edit', class: 'px-05')
+          td = link_to manual_process_flow, method: :delete, data: {confirm: 'Yeah?'} do
+            = icon('trash', class: 'px-05')
+
+  br
+
+  = link_to 'New Process flow', new_manual_process_flow_path

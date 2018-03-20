@@ -1,0 +1,21 @@
+h1 Editing Recipe #{@recipe.long_name}
+
+= simple_form_for([@flavor, @recipe]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.input :description
+
+  .form-actions
+    = f.button :submit
+
+
+h2 Ingredients
+= render @recipe.recipe_ingredients.sort_by(&:minus_pph)
+= render @recipe.recipe_ingredients.new
+
+
+h4#total_pph= render partial: 'total_grams_per_kilo_primary_ingredient'
+
+= link_to 'Done', [@flavor, @recipe]

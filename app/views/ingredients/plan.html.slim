@@ -1,0 +1,22 @@
+.p-1.m-1
+  .row: .mx-auto.pt-3.pb-1 *col_sizes(xs: 11, sm: 10, md: 9, lg: 7, xl: 6)
+    h2.text-xs-center.bg-faded.border-radius-3.py-1.px-2.card-like
+      | Ingredients For Next&nbsp;
+      select#ingredients-plan-days.no-chosen
+        = options_for_select [7, 14, 21], @days
+      | &nbsp;Days
+
+
+  .recipe.mt-1
+    .row: .mx-auto.px-0.card-like.border-radius-05 *col_sizes(xs: 11, sm: 10, md: 9, lg: 6, xl: 4)
+      .table-list.mb-0
+        .row.mx-0.pt-1.thead.border-top-radius-05
+          *col_sizes(xs: 4, sm: 5, md: 3, offset: {md: 2})
+            h4.text-xs-right.pr-0 Quantity
+          *col_sizes(xs: 8, sm: 7, md: 5, lg: 7)
+            h4 Ingredient
+        - @ingredients.each do |ingredient|
+          .row.mx-0.py-025.recipe_ingredient
+            *col_sizes(xs: 4, sm: 5, md: 3, offset: {md: 2})
+              .quantity.text-xs-right.pr-0= "#{(ingredient.quantity/1000).round(1)} kg"
+            *col_sizes(xs: 8, sm: 7, md: 5, lg: 7) = ingredient.name

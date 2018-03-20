@@ -1,0 +1,18 @@
+<%# frozen_string_literal: true %>
+$('.event_modal').modal('hide');
+<% if @batch.shipment.present? && (request.referer =~ Regexp.new(shipment_path(@batch.shipment))) %>
+
+  $('#<%= dom_id(@batch, 'shipment') %>').replaceWith('<%= \
+    escape_javascript(render partial: 'shipments/batch_shipment_view', object: @batch)\
+   %>');
+
+<% else %>
+
+  $('#<%= dom_id(@batch, 'batch_controls') %>').replaceWith('<%= \
+    escape_javascript(render partial: 'event_buttons', locals: {batch: @batch}) \
+  %>');
+
+<% end %>
+
+$('#alerts').replaceWith('<%= escape_javascript(render partial: 'layouts/flash_messages') %>');
+Alerts.showFlash();

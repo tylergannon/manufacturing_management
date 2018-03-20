@@ -1,0 +1,14 @@
+h2 Manufacturing SKUs
+- if can? :create, Sku
+  = link_to 'New SKU', [:new, :sku]
+= list_group do
+  = list_group_items @skus do |sku|
+    - if can? :edit, sku
+      = link_to [:edit, sku], class: 'pull-left add-space-right' do
+        i.fa.fa-pencil-square-o
+    = link_to labels_sku_path(sku, format: :pdf, boxes: 10), class: 'pull-left add-space-right', target: '_blank' do
+        i.fa.fa-cloud-download
+        span.add-space-right Labels
+    = list_group_item_header sku.title
+    - if sku.upc_filename
+      = image_tag("upcs/#{sku.upc_filename}", width: 200)

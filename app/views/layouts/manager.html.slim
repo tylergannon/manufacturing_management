@@ -1,0 +1,54 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"
+    /! The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    meta content="Manufacturing" name="description"
+    meta content="AprilSeven" name="author"
+    /! link href="../../favicon.ico" rel="icon"
+    /! Custom styles for this template
+    title= content_for?(:title) ? yield(:title) : "Manufacturing Production Management"
+
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all", 'data-turbolinks-track' => true
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+
+  body
+    #header
+      nav class="navbar navbar-light bg-faded"
+        a class="navbar-brand" href=root_path Manufacturing
+        - if user_signed_in?
+          ul class="nav navbar-nav"
+            li class="nav-item"
+              a class="nav-link active" href=dashboard_path Dashboard
+            li class="nav-item"
+              a class="nav-link active" href=page_path('Table_Of_Contents') Wiki
+            li class="nav-item"
+              a class="nav-link active" href=batches_path Batches
+            li class="nav-item dropdown"
+              a*dropdown_toggle_link New
+              div class="dropdown-menu"
+                a class="dropdown-item" href=new_primary_ingredient_shipment_path PrimaryIngredient Shipment
+                a class="dropdown-item" href=new_batch_path Batch
+            li class="nav-item dropdown"
+              a*dropdown_toggle_link Recipes
+              div class="dropdown-menu"
+                a class="dropdown-item" href=flavor_recipes_path('flavor1') flavor1
+                a class="dropdown-item" href=flavor_recipes_path('flavor3') Flavor3
+                a class="dropdown-item" href=flavor_recipes_path('flavor2') Flavor2
+            li class="nav-item"
+              = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link active'
+            - if current_user.admin
+              li class="nav-item"
+                = link_to 'Admin', admin_root_path, class: 'nav-link active', 'data-turbolinks' => false
+      #alerts= flash_messages
+      = yield :header
+    .container-fluid
+      = yield

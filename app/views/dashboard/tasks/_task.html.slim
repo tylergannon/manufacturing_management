@@ -1,0 +1,12 @@
+li.list-group-item class=dom_class(task) data-task-id=task.id
+  - if task.completed
+    span class="tag tag-success tag-pill pull-xs-left" = friendly_date(task.completed_at)
+  - elsif task.due_on
+    span.tag.tag-pill.pull-xs-left class=task_due_class(task) = task_friendly_date(task.due_on)
+
+  a target="_blank" href=task.task_url = task.name
+
+  - unless task.completed
+    = link_to complete_dashboard_task_path(task), class: 'complete-task', method: :post, data: { remote: true, confirm: 'Done?' } do
+      span.tag.tag-pill.tag-success
+        = icon('check')

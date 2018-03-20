@@ -1,0 +1,6 @@
+#alerts
+  - flash.each do |msg_type, message|
+  	- [message].flatten.each do |m|
+	    .alert.card-like.fade.in class=bootstrap_class_for(msg_type) style='display: none;'
+	      button.close data-dismiss="alert" x
+	      = m

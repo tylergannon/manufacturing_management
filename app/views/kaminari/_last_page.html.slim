@@ -1,0 +1,5 @@
+li.page-item
+  - unless current_page.last?
+    = link_to url, class: 'page-link', remote: remote do
+      span aria-hidden="true" &raquo;
+      span.sr-only Last

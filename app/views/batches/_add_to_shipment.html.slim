@@ -1,0 +1,24 @@
+#add-to-shipment-modal.show-immediately.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+        h4#myModalLabel.modal-title Select A Shipment
+      = simple_form_for @batch, remote: true do |f|
+        .modal-body
+          - if Shipment.with_scheduled_state.any?
+            = f.input :shipment_id, collection: Shipment.with_scheduled_state, label: false
+          - else
+            p
+              | There are no shipments currently scheduled.&nbsp;
+
+            p= link_to new_shipment_path, class: 'btn btn-lg btn-primary' do
+              = responsive_btn_text 'calendar-plus-o', 'Schedule A Shipment'
+
+
+        .modal-footer
+          .btn-group
+            button.btn.btn-secondary data-dismiss="modal" type="button"  Close
+            = f.submit 'Save', class: 'btn btn-primary'
+= render partial: 'batches/tabs/overview', locals: {batch: @batch}

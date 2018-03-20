@@ -1,0 +1,16 @@
+.row#photo_upload
+  .col-xs-12
+    = render partial: 'photos/photo_gallery', locals: {photos: owner.photos}
+    = simple_form_for(Photo.new(owner: owner), format: :json, remote: true, multipart: true, authenticity_token: true) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input_field :owner_id, as: :hidden
+        = f.input_field :owner_type, as: :hidden
+        /i.fa.fa-question-circle.mr-1 *tooltip(t('help.shipments.upload_button'), placement: 'bottom', trigger: 'hover click')
+        = f.input_field :photo, as: :file, accept: 'image/*'
+
+      .form-actions[style='display: none;']
+        = f.button :submit, class: 'hidden-xs-down'
+
+  .col-xs-12: #upload-list.list-group

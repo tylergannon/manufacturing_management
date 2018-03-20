@@ -1,0 +1,23 @@
+= simple_form_for(@standard_operating_procedure) do |f|
+  = f.error_notification
+
+  .form-inputs
+    #collapseDocumentProperties.collapse
+      = f.input :title
+      = f.input :version
+      = f.input :process_id, label: 'Process Id', as: :integer
+      = f.fields_for :change_logs, @change_log do |ff|
+        = ff.input :notes, label: 'Change Notes', placeholder: 'e.g. created, added section...'
+        = ff.input_field :user_id, as: :hidden
+        = label_tag 'Editor Theme:'
+        = select_tag :theme, options_for_select(editor_themes, default_editor_theme), id: 'theme_select', class: 'no-chosen'
+        = label_tag 'Font Size:'
+        = text_field_tag :font_size, default_editor_font_size, id: 'editor_font_size'
+    = f.input_field :body, as: :hidden
+    #document_body [data-url=url_for(@standard_operating_procedure) 
+                    data-id=@standard_operating_procedure.id
+                    data-form-key=dom_class(@standard_operating_procedure)]
+      = @standard_operating_procedure.body
+
+  .form-actions
+    button type='submit' class='hidden-xs-up' Save

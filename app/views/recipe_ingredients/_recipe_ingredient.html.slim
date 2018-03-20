@@ -1,0 +1,10 @@
+= form_for [recipe_ingredient.recipe, recipe_ingredient], authenticity_token: true, remote: true do |f|
+  table id=dom_id(recipe_ingredient)
+    tr
+      td= f.collection_select :ingredient_id, Ingredient.all, :id, :name
+      td= f.text_field :grams_per_kilo_primary_ingredient
+      td= "#{recipe_ingredient.pph} pph"
+      td= f.submit 'Save'
+      td
+        - if recipe_ingredient.persisted?
+          = link_to 'Destroy', [recipe_ingredient.recipe, recipe_ingredient], method: :delete, data: {confirm: 'Sure?', remote: true}

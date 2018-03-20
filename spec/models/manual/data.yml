@@ -1,0 +1,20 @@
+- "(Entry)Raw PrimaryIngredient \nQA Foo":
+  - "(Reject)Hazardous?":
+    - "(Yes) Trigger Full Analysis(process)[!!]"
+    - End
+  - "(No) Raw PrimaryIngredient Disposal"
+- (Accept) Blow Drying
+- Marinating
+- "Raw Product QA":
+  - "(Reject) Raw Product\nHazard?":
+    - (Yes) Trigger Hazard 2
+  - "(No) Raw Product Disposal"
+- (Accept) Dehydrating
+- "Finished\nProduct QA":
+  - "Unmarketable Product(process)"
+  - "Foo Bar"
+- Cooling
+- "To Process:\nPackaging"
+- module
+- Tight
+- Dope

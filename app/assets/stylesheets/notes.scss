@@ -1,0 +1,25 @@
+.flash-transition {
+  border: 2px $brand-danger outset;
+}
+
+#notes_container {
+  .card-title {
+    border-bottom: $card-border-width solid $card-border-color;
+  }
+}
+.note-form {
+  .btn-group .btn:last-child {
+    border-bottom-right-radius: 0;
+  }
+  .btn-group .btn:first-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .btn {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  textarea:not(:focus) {
+    border: none;
+  }
+}

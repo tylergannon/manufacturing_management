@@ -1,0 +1,21 @@
+= content_for(:title) do
+  | Preparing To Ship ##{friendly_date(@shipment.ships_on)} * Manufacturing
+
+- cache @shipment do
+  .shipping_preparations.p-1
+    .row
+      .col-md-6
+        h2.mb-0 Shipping Preparations For #{friendly_date(@shipment.ships_on)}
+        - if can? :ship, @shipment
+          p.mb-0 This shipment is ready to go!  Once it leaves the dock, click the button to notify the system.
+        - else
+          p.mb-0 Please complete all three pages of this form before the shipment date.
+
+      - if can? :ship, @shipment
+        .col-md-6
+          = shipment_event_link(@shipment, :ship) do
+            = responsive_btn_text('truck', 'Ship!')
+
+    = render partial: 'shipment_preparations_form'
+    = render partial: 'shipment_photos'
+    = render partial: 'shipment_batches'

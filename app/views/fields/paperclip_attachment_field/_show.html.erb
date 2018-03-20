@@ -1,0 +1,6 @@
+
+<% if field.data.present? %>
+<%= link_to 'Secure Download', [:download_purchase_order, :admin, field.data.instance], target: '_blank' %>
+<% else %>
+ Not Uploaded
+<% end %>

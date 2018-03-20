@@ -1,0 +1,44 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"
+    /! The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    meta content="Manufacturing" name="description"
+    meta content="AprilSeven" name="author"
+    /! link href="../../favicon.ico" rel="icon"
+    /! Custom styles for this template
+    title= content_for?(:title) ? yield(:title) : "Manufacturing Production Management"
+
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", :media => "all", 'data-turbolinks-track' => true
+    /= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    /= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    /= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    /= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = content_for(:head)
+
+  body
+    - cache current_user do
+      #header
+        nav class="navbar navbar-light hidden-xs-down"
+          a#primary_logo.float-xs-left.navbar-brand href=root_path
+            = image_tag 'manufacturing_logo.png', id: 'primary_logo', height: '30px'
+          ul.nav.navbar-nav= render 'layouts/menu' if user_signed_in?
+        nav class="navbar navbar-default hidden-sm-up"
+          button class="navbar-toggler" type="button" aria-controls="exCollapsingNavbar" aria-expanded="false" data-toggle="collapse" data-target="#exCollapsingNavbar" &#9776;
+          a#primary_logo class="navbar-brand" href=root_path Manufacturing
+          ul class="nav nav-pills nav-stacked collapse" id="exCollapsingNavbar"
+            = render 'layouts/menu' if user_signed_in?
+    = render partial: 'layouts/flash_messages'
+
+    .container-fluid#main_container.px-0-xs: .main_content.m-0-sm-up.pb-3
+      - if content_for?(:content)
+        = yield :content
+      - else
+        = yield
+      = cache do
+        = render partial: 'layouts/find_batch_modal', cache: true

@@ -1,0 +1,14 @@
+.row id=dom_id(note) : *col_sizes(md: 7, xs: 12) : .card
+  .card-block.p-0.note
+    .card-title.bg-faded.p-025.pl-05.mb-0
+      span.font-weight-bold.mr-025 #{note.user.first_name}
+      span.hidden-xs-down.mr-025 commented on
+      span #{friendly_date(note.created_at)}
+      span.controls.pull-right
+        - if can? :edit, note
+          = link_to edit_note_path(note), data: {remote: true} do
+            i.px-1.fa.fa-pencil-square-o
+        - if can? :destroy, note
+          = link_to note_path(note), method: :delete, data: {confirm: 'Really delete this note?', remote: true} do
+            i.px-1.fa.fa-trash
+    .notes.px-05.py-025= note.notes

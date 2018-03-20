@@ -1,0 +1,20 @@
+= content_for(:title) do
+  | Batch ##{@batch.batch_number} * Manufacturing
+
+= content_for(:content) do
+  .pt-05: .row: .col-xs-12
+    = cache @batch, skip_digest: true do
+      .row.pl-1
+        .col-sm-8: h2.card-title Batch #{@batch.batch_number} #{@batch.flavor.name}
+        .col-sm-4.col-lg-6: h3.pull-sm-right.pull-lg-left= @batch.production_date.strftime("%b %-d, %Y")
+    = nav_tabs do
+      = icon_tab 'fa-info-circle', 'overview', active: @active_tab
+      = icon_tab 'fa-tasks', 'marinade', active: @active_tab
+      = icon_tab 'fa-pencil', 'edit_batch', active: @active_tab, action: :edit
+      = icon_tab 'fa-comment-o', 'feedback', size: 'xs', active: @active_tab
+      = icon_tab 'fa-camera', 'photos', size: 'xs', active: @active_tab
+    = tab_content do
+      = tab_pane @active_tab do
+        = yield
+
+= render template: 'layouts/application'

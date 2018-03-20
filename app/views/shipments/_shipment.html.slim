@@ -1,0 +1,17 @@
+.row.mx-0.py-1.bb-1.linkable class=shipment.warning_class data-href=shipment_path(shipment)
+  .col-xs-4
+    - if shipment.ships_on <= 1.year.ago
+      = shipment.ships_on.strftime("%b %-d, %Y")
+    - else
+      = shipment.ships_on.strftime("%b %-d")
+  .col-xs-4.workflow_state= shipment.workflow_state.titleize
+  .col-xs-4
+    - unless shipment.shipped? || shipment.cancelled?
+      - if shipment.ships_on > Date.today
+        = (shipment.ships_on - Date.today).to_i
+        | &nbsp; Days
+      - elsif shipment.ships_on == Date.today
+        | Today
+      - else
+        = (shipment.ships_on - Date.today).to_i.abs
+        | &nbsp; Days Ago

@@ -1,0 +1,14 @@
+.modal#batch-confirmation-alert
+  .modal-dialog@document
+    .modal-content
+      .modal-header
+        $button.close aria-label="Close" data-dismiss="modal": i.fa.fa-times
+        h4.modal-title Batch Recipe Confirmation Request
+      .modal-body
+        p
+          | {{ requested_by }} has requested to start production of batch {{ batch_number }}.&nbsp;
+          a href="/batches/{{ batch_number }}#marinade" Click Here
+          | &nbsp;to verify the marinade quantity and confirm start of production.
+        p A copy of the marinade has also been emailed to you.
+      .modal-footer
+        button.btn.btn-secondary data-dismiss="modal" type="button" OK

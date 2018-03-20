@@ -1,0 +1,11 @@
+= content_for(:title) do
+  | Shipped On ##{friendly_date(@shipment.shipped_on)} * Manufacturing
+
+.shipping_preparations.p-1
+  .row
+    .col-md-6
+      h2 Shipped On #{friendly_date(@shipment.shipped_on)}: #{@shipment.total_boxes} Boxes
+
+  = render partial: 'completed_shipment'
+  = render partial: 'shipment_photos'
+  = render partial: 'shipment_batches'

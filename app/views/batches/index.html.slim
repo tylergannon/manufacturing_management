@@ -1,0 +1,37 @@
+= content_for(:title) do
+  | Batches * Manufacturing
+
+
+- cache @batches do
+  .batch-list.table-list.m-0
+    .row.mx-0.pt-1.thead
+      .col-md-5
+        h3.pb-2= @page_title
+      .col-md-7
+        ul.nav.nav-pills.card-like.pull-md-right
+          li.nav-item
+            a.nav-link *active_link('all') href=batches_path  All
+          li.nav-item
+            a.nav-link *active_link('current') href=current_batches_path  Current
+          li.nav-item
+            a.nav-link *active_link('recent') href=recent_batches_path  Recent
+          li.nav-item.dropdown
+            a.nav-link.dropdown-toggle *active_link('state') aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"  By Progress
+            .dropdown-menu
+              - %w(scheduled started qa accepted shipped rejected).each do |state|
+                a.dropdown-item *active_state(state) href=url_for([state, :batches]) = state.titleize
+
+          li.nav-item
+            a.nav-link#open_batch_modal_link href="#" Find
+          li.nav-item
+            a.nav-link href=batches_path(format: :csv) CSV
+
+
+
+      .col-xs-2: h5 Code
+      .col-xs-2: h5 Date
+      .col-xs-2: h5 Flavor
+      .col-xs-2: h5 State
+      .col-xs-2: h5 Ship Date
+    = render partial: 'batches/batch', collection: @batches, cached: true
+  = paginate @batches

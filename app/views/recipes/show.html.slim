@@ -1,0 +1,37 @@
+.recipe
+  .row: .mx-auto.pt-3.pb-1 *col_sizes(xs: 11, sm: 10, md: 9, lg: 7, xl: 5)
+    h2.text-xs-center.bg-faded.border-radius-3.py-1.px-2.card-like
+      = @title
+
+  .row: .mx-auto.px-0.card-like.border-radius-1 *col_sizes(xs: 10, sm: 9, md: 8, lg: 6, xl: 4)
+    .table-list.mb-0
+      .row.mx-0.pt-1.thead
+        *col_sizes(xs: 4, sm: 5, md: 3, offset: {md: 2})
+          h4.text-xs-right.pr-0 Quantity
+        *col_sizes(xs: 8, sm: 7, md: 5, lg: 7)
+          h4 Ingredient
+      - @recipe.recipe_ingredients.order(grams_per_kilo_primary_ingredient: :desc).each do |recipe_ingredient|
+        .row.mx-0.py-05.recipe_ingredient[
+              id=dom_id(recipe_ingredient)
+              data-grams-per-kilo=recipe_ingredient.grams_per_kilo_primary_ingredient]
+          *col_sizes(xs: 4, sm: 5, md: 3, offset: {md: 2})
+            .quantity.text-xs-right.pr-0= ingredient_quantity(recipe_ingredient)
+          *col_sizes(xs: 8, sm: 7, md: 5, lg: 7) = recipe_ingredient.ingredient.name
+
+      .row.my-0.py-0
+        .col-xs-12: form.form-horizontal: .form-group.mb-0: .input-group
+          input.form-control.border-radius-1 type="number" style="width: 60px;" id="recipe_primary_ingredient_quantity" value=@primary_ingredient_quantity
+          .input-group-addon.border-radius-1 kg primary_ingredient
+          - if can? :edit, @recipe
+            .input-group-addon.border-radius-1 *tooltip('Edit Recipe', placement: 'bottom')
+              = link_to url_for([:edit, @flavor, @recipe]), class: 'pull-xs-left' do
+                i class="fa fa-pencil"
+            .input-group-addon.border-radius-1 *tooltip('Clone This Recipe Into Another', placement: 'bottom')
+              = link_to url_for([:copy, @flavor, @recipe]), class: 'pull-xs-left', method: :post do
+                i class="fa fa-clone"
+
+
+
+          /td &nbsp;
+          /td= @recipe.recipe_ingredients.sum(&:grams_per_kilo_primary_ingredient)
+          /td= @recipe.recipe_ingredients.sum(&:grams_per_kilo_primary_ingredient) * @primary_ingredient_quantity * @multiplier

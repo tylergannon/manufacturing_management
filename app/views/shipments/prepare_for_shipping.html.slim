@@ -1,0 +1,43 @@
+- cache "#{@shipment.cache_key}/prepare_for_shipping", expires_in: 30.minutes do
+  .p-1
+    .row: .col-md-8.offset-md-2
+      h2 Prepare Shipment For Freight
+      markdown:
+        Before _preparing for shipping_, please make sure:
+
+      .list-group
+        .list-group-item
+          i.mr-1 class="fa fa-check-square-o"
+          | All batches are accounted for on this shipment manifest.
+        .list-group-item
+          i.mr-1 class="fa fa-check-square-o"
+          | Do not proceed until all batches are added to this shipment!
+        .list-group-item
+          i.mr-1 class="fa fa-check-square-o"
+          | You are prepared to undergo final QA inspections.
+
+      h3.mt-2 Before Shipping, You Must:
+      .list-group
+        .list-group-item
+          i.mr-1 class="fa fa-square-o"
+          | Perform final QA on product.
+          ul.mb-0: li Mark each batch as Accepted in the system.
+        .list-group-item
+          i.mr-1 class="fa fa-square-o"
+          | Ensure proper labeling and documentation.
+        .list-group-item
+          i.mr-1 class="fa fa-square-o"
+          | Notify carrier that shipment is ready.
+        .list-group-item
+          i.mr-1 class="fa fa-square-o"
+          | Upload photos of prepared cargo.
+      = form_tag workflow_event_shipment_path(@shipment) do
+        = hidden_field_tag :event_id, 'prepare_for_shipping'
+        .btn-group.card-like.my-1
+          button type="submit" class='btn btn-success'
+            i.mr-1 class="fa fa-truck"
+            | Prepare For Shipping
+          a href=shipment_path(@shipment) class="btn btn-secondary"
+            i.mr-1 class="fa fa-ban"
+            | Go Back
+      /= render partial: 'photos/photo_upload', locals: {owner: @shipment}

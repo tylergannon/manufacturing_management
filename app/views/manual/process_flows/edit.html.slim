@@ -1,0 +1,21 @@
+.row.m-0
+  #editor.split.split-horizontal.pl-0
+    ul.nav.nav-tabs
+      / li.nav-item= link_to manual_markdown_path, id: 'refresh_markdown', class: 'nav-link', method: :post, data: {remote: true} do
+      /   = icon('refresh', class: 'px-05')
+      li.nav-item= link_to @manual_process_flow, class: 'nav-link', id: 'refresh_png', data: {remote: true} do
+        = icon('refresh', class: 'px-05')
+      li.nav-item: a.nav-link.save class=dom_class(@manual_process_flow) href='#'
+        = icon('save', class: 'px-05')
+      li.nav-item: a#collapse_menu.nav-link aria-controls="collapseDocumentProperties" aria-expanded="false" data-toggle="collapse" href="#collapseDocumentProperties"
+        = icon('arrow-down', class: 'px-05')
+      li.nav-item= link_to '#', class: 'nav-link', id: 'show_help_menu' do
+        = icon('question', class: 'px-05')
+      li.nav-item: a#editor_tab.nav-link.active role='tab' data-toggle='tab' href='#editor_pane'
+        = icon('file-text', class: 'px-05')
+      li.nav-item: a#editor_tab.nav-link href=manual_process_flows_path
+        = icon('arrow-left', class: 'px-05')
+
+    .tab-content
+      .tab-pane.active#editor_pane role='tabpanel'= render partial: 'form'
+  #markdown.split.split-horizontal=render partial: 'png_img_tag', locals: {process_flow: @manual_process_flow}

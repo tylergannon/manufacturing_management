@@ -1,0 +1,257 @@
+@font-face {
+  font-family: MyriadPro;
+  src: asset-url('MyriadPro-Regular.otf');
+}
+
+@each $size, $lengths in $spacers {
+  $length-x:   map-get($lengths, x);
+
+  .border-radius-#{$size} {
+    border-radius: $length-x;
+  }
+
+  .border-top-radius-#{$size} {
+    border-top-left-radius: $length-x;
+    border-top-right-radius: $length-x;
+  }
+
+  .border-bottom-radius-#{$size} {
+    border-bottom-left-radius: $length-x;
+    border-bottom-right-radius: $length-x;
+  }
+
+  .border-left-radius-#{$size} {
+    border-top-left-radius: $length-x;
+    border-bottom-left-radius: $length-x;
+  }
+
+  .border-right-radius-#{$size} {
+    border-top-right-radius: $length-x;
+    border-top-left-radius: $length-x;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  @each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $lengths in $spacers {
+      $length-x:   map-get($lengths, x);
+      $length-y:   map-get($lengths, y);
+
+      .#{$abbrev}-#{$size}-sm-up { #{$prop}:        $length-y $length-x !important; } // a = All sides
+      .#{$abbrev}t-#{$size}-sm-up { #{$prop}-top:    $length-y !important; }
+      .#{$abbrev}r-#{$size}-sm-up { #{$prop}-right:  $length-x !important; }
+      .#{$abbrev}b-#{$size}-sm-up { #{$prop}-bottom: $length-y !important; }
+      .#{$abbrev}l-#{$size}-sm-up { #{$prop}-left:   $length-x !important; }
+
+      // Axes
+      .#{$abbrev}x-#{$size}-sm-up {
+        #{$prop}-right:  $length-x !important;
+        #{$prop}-left:   $length-x !important;
+      }
+      .#{$abbrev}y-#{$size}-sm-up {
+        #{$prop}-top:    $length-y !important;
+        #{$prop}-bottom: $length-y !important;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  @each $prop, $abbrev in (margin: m, padding: p) {
+    @each $size, $lengths in $spacers {
+      $length-x:   map-get($lengths, x);
+      $length-y:   map-get($lengths, y);
+
+      .#{$abbrev}-#{$size}-xs { #{$prop}:        $length-y $length-x !important; } // a = All sides
+      .#{$abbrev}t-#{$size}-xs { #{$prop}-top:    $length-y !important; }
+      .#{$abbrev}r-#{$size}-xs { #{$prop}-right:  $length-x !important; }
+      .#{$abbrev}b-#{$size}-xs { #{$prop}-bottom: $length-y !important; }
+      .#{$abbrev}l-#{$size}-xs { #{$prop}-left:   $length-x !important; }
+
+      // Axes
+      .#{$abbrev}x-#{$size}-xs {
+        #{$prop}-right:  $length-x !important;
+        #{$prop}-left:   $length-x !important;
+      }
+      .#{$abbrev}y-#{$size}-xs {
+        #{$prop}-top:    $length-y !important;
+        #{$prop}-bottom: $length-y !important;
+      }
+    }
+  }
+}
+
+$font-family-sans-serif: "MyriadPro", sans-serif !default;
+$brand-primary: #FF8345;
+$brand-primary-darker: #FF5500;
+$btn-primary-bg: #FF9E6E;
+
+html {
+  font-family: $font-family-sans-serif;
+}
+
+// .btn-primary {
+//   background-color: $btn-primary-bg;
+//   border-color: $btn-primary-bg;
+//   color: black;
+//   &:hover {
+//     background-color: $brand-primary-darker;
+//     border-color: $brand-primary-darker;
+//     color: black;
+//   }
+// }
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-bottom {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@mixin card {
+  position: relative;
+  @include card-shadow;
+}
+
+@mixin hover-card {
+  &:hover {
+    position: relative;
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+.card-shadow {
+  @include card-shadow;
+}
+
+.card-like {
+  @include card;
+}
+
+
+@include media-breakpoint-down(md) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.2rem;
+  }
+}
+@include media-breakpoint-down(sm) {
+  h1 {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  h4 {
+    font-size: 1.0rem;
+  }
+}
+@include media-breakpoint-down(xs) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  h3 {
+    font-size: 1.0rem;
+  }
+  h4 {
+    font-size: 1.0rem;
+  }
+  h5 {
+    font-size: 0.8rem;
+  }
+}
+
+.bb-1 {
+  border-bottom: 1px solid $gray-light;
+}
+
+.add-space-left {
+  padding-left: 4px;
+}
+
+.add-space-right {
+  padding-right: 4px;
+}
+
+a#primary_logo {
+  margin-top: -6px;
+}
+
+#header {
+  background-color: $brand-primary;
+  position: relative;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
+}
+
+#main_container {
+  background-color: $gray-lightest;
+  > .main_content {
+    background-color: $body-bg;
+    @include card;
+    min-height: 700px;
+    @include media-breakpoint-down(sm) {
+      min-height: 500px;
+    }
+    @include media-breakpoint-down(xs) {
+      min-height: 400px;
+    }
+  }
+}
+
+
+.table-list {
+  .row {
+    &:first-child {
+      background-color: $gray-lighter;
+      border-bottom: 1px solid $gray-light;
+    }
+    &:nth-child(2n+1) {
+      background-color: $gray-lighter;
+    }
+    &.linkable {
+      transition: box-shadow 0.15s;
+      @include hover-card;
+    }
+  }
+}
+
+.dropdown-menu {
+  @include card-shadow;
+}
+
+.linkable:hover {
+  cursor: pointer;
+}
